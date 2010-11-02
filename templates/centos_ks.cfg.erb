@@ -1,0 +1,79 @@
+install 
+url --url http://urd.puppetlabs.lan/centos/<%=ver%>/os/<%=arch%>
+cdrom
+lang en_US.UTF-8
+keyboard us
+network --device eth0 --bootproto dhcp
+
+rootpw --iscrypted $1$UlYyAJfh$CjQlsvxXWD/5UDnPJTMHm.
+firewall --enabled --port=22:tcp
+authconfig --enableshadow --enablemd5
+selinux --disabled
+timezone --utc America/Vancouver
+bootloader --location=mbr --driveorder=sda --md5pass=$1$UlYyAJfh$CjQlsvxXWD/5UDnPJTMHm.
+
+firstboot --enabled
+
+# The following is the partition information you requested
+# Note that any partitions you deleted are not expressed
+# here so unless you clear all partitions first, this is
+# not guaranteed to work
+#clearpart --linux --drives=sda
+zerombr
+clearpart --all --initlabel 
+part /boot --fstype ext3 --size=100 --ondisk=sda
+part pv.2 --size=0 --grow --ondisk=sda
+volgroup systemvg pv.2
+logvol / --fstype ext3 --name=_slash --vgname=systemvg --size=1024 
+logvol /usr --fstype ext3 --name=_usr --vgname=systemvg --size=1024
+logvol /var --fstype ext3 --name=_var --vgname=systemvg --size=1024 
+logvol swap --fstype swap --name=_swap --vgname=systemvg --size=1024 --grow --maxsize=2048
+logvol /data --fstype ext3 --name=_data --vgname=systemvg --size=2048 --grow --maxsize=100000
+
+reboot
+
+%packages 
+@core
+
+vim-enhanced
+screen
+less
+
+%post
+#(
+echo "begin post script"
+#< /proc/cmdline sed 's/ /\n/g' | grep ^myop_ > /tmp/boot_parameters
+< /proc/cmdline sed 's/ /\n/g' > /tmp/boot_parameters
+. /tmp/boot_parameters
+
+#get more packages
+rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+
+#disable some services -- better would be to keep them from being installed
+chkconfig cups off
+chkconfig sendmail off
+chkconfig bluetooth off
+chkconfig hidd off
+chkconfig iptables off
+chkconfig ip6tables off
+chkconfig portmap off
+chkconfig avahi-daemon off
+chkconfig nfs off
+chkconfig nfslock off
+chkconfig cpuspeed off
+chkconfig rpcgssd off
+chkconfig rpcidmapd off
+chkconfig rpcsvcgssd off
+
+if [ "$devel" == "yes" ]; then
+  yum -y groupinstall "Development tools"
+fi
+
+if [[ $plop_role ]]; then
+        wget -O /tmp/build.pl http://urd.puppetlabs.lan/ks/build.pl
+        chmod 750 /tmp/build.pl
+        /tmp/build.pl --role "${plop_role}"
+fi
+#) > /root/post_install.log 2>&1
+%end
+
