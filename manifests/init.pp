@@ -1,5 +1,6 @@
 class pxe {
 	include pxe::params
+	#include pxe::centos
 
 	include apache
 
@@ -33,7 +34,7 @@ class pxe {
 		#"${tftp_root}/pxelinux.cfg": ensure => directory, owner => root, group => root, mode => 755;
 		"${tftp_root}/images": ensure => directory, owner => root, group => root, mode => 755;
 		"${tftp_root}/images/centos": ensure => directory, owner => root, group => root, mode => 755;
-		"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
+		#"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
 	}
 
 	service {
@@ -50,12 +51,12 @@ class pxe {
 	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
 	
 	pxe::centos { 
-		"centos_i386_4.8":
-			arch => "i386",
-			ver => "4.8";
-		"centos_x86_64_4.8":
-			arch => "x86_64",
-			ver => "4.8";
+#		"centos_i386_4.8":
+#			arch => "i386",
+#			ver => "4.8";
+#		"centos_x86_64_4.8":
+#			arch => "x86_64",
+#			ver => "4.8";
 		"centos_i386_5.5":
 			arch => "i386",
 			ver => "5.5";
@@ -63,6 +64,4 @@ class pxe {
 			arch => "x86_64",
 			ver => "5.5";
 	}
-	
-}
-
+}	
