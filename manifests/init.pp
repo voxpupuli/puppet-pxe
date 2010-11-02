@@ -1,6 +1,6 @@
 class pxe {
 	include pxe::params
-    include pxe::centos
+
 	include apache
 
 	$tftp_root = $pxe::params::tftp_root
@@ -49,7 +49,7 @@ class pxe {
 	
 	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
 	
-	centosimages { 
+	pxe::centos { 
 		"centos_i386_4.8":
 			arch => "i386",
 			ver => "4.8";
