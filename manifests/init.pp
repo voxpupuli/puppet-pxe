@@ -64,4 +64,14 @@ class pxe {
 			arch => "x86_64",
 			ver => "5.5";
 	}
+    
+    pxe::ubuntu {
+        "ubuntu lucid i386":
+            arch => "i386",
+            ver => "lucid";
+        "ubuntu lucid adm64":
+            arch => "adm64",
+            ver => "lucid";
+    }
+
 }	
