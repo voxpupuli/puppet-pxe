@@ -1,7 +1,7 @@
 define pxe::ubuntu($arch,$ver) {
    
     # http://mirrors.kernel.org/ubuntu/dists/lucid/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64/
-    $baseurl = "http://mirrors.kernel.org/ubuntu/dists/${ver}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}"
+    $baseurl = "http://mirrors.kernel.org/ubuntu/dists"
 
 	
 	$dirs = [
@@ -13,12 +13,12 @@ define pxe::ubuntu($arch,$ver) {
 	exec {
 		"pull ubuntu pxe linux $arch $ver":
 			cwd => "${tftp_root}/images/ubuntu/${arch}/${ver}",
-			command => "/usr/bin/wget http://mirrors.kernel.org/ubuntu/dists/${ver}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}/linux",
-			creates => "${tftp_root}/images/ubuntu/${arch}/${ver}/linux",
+			command => "/usr/bin/wget ${baseurl}/${ver}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}/linux",
+			creates => "${tftp_root}/images/ubuntu/${arch}/${ver}/linux";
 		"pull centos pxe initrd.img $arch $ver":
 			cwd => "${tftp_root}/images/ubuntu/${arch}/${ver}",
-			command => "/usr/bin/wget http://mirrors.kernel.org/ubuntu/dists/${ver}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}/initrd.gz",
-			creates => "${tftp_root}/images/ubuntu/${arch}/${ver}/initrd.gz",
+			command => "/usr/bin/wget ${baseurl}/${ver}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}/initrd.gz",
+			creates => "${tftp_root}/images/ubuntu/${arch}/${ver}/initrd.gz";
 	}
 
 	#file {
