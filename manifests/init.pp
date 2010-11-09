@@ -33,7 +33,6 @@ class pxe {
 			source => "/usr/lib/syslinux/chain.c32";
 		#"${tftp_root}/pxelinux.cfg": ensure => directory, owner => root, group => root, mode => 755;
 		"${tftp_root}/images": ensure => directory, owner => root, group => root, mode => 755;
-		"${tftp_root}/images/centos": ensure => directory, owner => root, group => root, mode => 755;
 		#"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
 	}
 
@@ -44,8 +43,12 @@ class pxe {
 	}
 	
 	$dirs = [
+		"${tftp_root}/images/centos",
 		"${tftp_root}/images/centos/i386",
 		"${tftp_root}/images/centos/x86_64",
+		"${tftp_root}/images/ubuntu",
+		"${tftp_root}/images/ubuntu/i386",
+		"${tftp_root}/images/ubuntu/amd64",
 	]
 	
 	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
@@ -69,8 +72,8 @@ class pxe {
         "ubuntu lucid i386":
             arch => "i386",
             ver => "lucid";
-        "ubuntu lucid adm64":
-            arch => "adm64",
+        "ubuntu lucid amd64":
+            arch => "amd64",
             ver => "lucid";
     }
 
