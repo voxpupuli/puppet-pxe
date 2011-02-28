@@ -12,5 +12,6 @@ pxe::bootstrap {
     ver        => "maverick",
     proxy      => "http://vanir.puppetlabs.lan:3142",
     role       => "standard",
+    arch       => "amd64",
 }
 
