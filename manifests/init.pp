@@ -1,16 +1,16 @@
-class pxe {
-	include pxe::params
-	#include pxe::centos
-
-	include apache
-
-	$tftp_root = $pxe::params::tftp_root
-	$ks_root   = $pxe::params::ks_root
+class pxe ($tftp_root='/tftpboot'){
+  include apache
+  include pxe::menu
 
 	package {
 		"xinetd":				ensure => installed;
 		"syslinux":			ensure => installed;
-		"tftp-server":	ensure => installed;
+		"tftp-server":	
+      name => $operatingsystem ? {
+        Ubuntu => "tftpd-hpa",
+        default => "tftp-server",
+      },
+      ensure => installed;
 	}
 
 	file {
@@ -19,21 +19,58 @@ class pxe {
 			group		=> root,
 			mode		=> 644,
 			notify	=> Service["xinetd"],
-			source	=> "puppet:///modules/pxe/tftp_xinetd";
-		"${tftp_root}": ensure => directory, owner => root, group => root, mode => 755;
-		"${tftp_root}/pxelinux.0": ensure => directory, owner => root, group => root, mode => 755,
-			source => "/usr/lib/syslinux/pxelinux.0";
-		"${tftp_root}/menu.c32": ensure => directory, owner => root, group => root, mode => 755,
-			source => "/usr/lib/syslinux/menu.c32";
-		"${tftp_root}/memdisk": ensure => directory, owner => root, group => root, mode => 755,
-			source => "/usr/lib/syslinux/memdisk";
-		"${tftp_root}/mboot.c32": ensure => directory, owner => root, group => root, mode => 755,
-			source => "/usr/lib/syslinux/mboot.c32";
-		"${tftp_root}/chain.c32": ensure => directory, owner => root, group => root, mode => 755,
-			source => "/usr/lib/syslinux/chain.c32";
-		#"${tftp_root}/pxelinux.cfg": ensure => directory, owner => root, group => root, mode => 755;
-		"${tftp_root}/images": ensure => directory, owner => root, group => root, mode => 755;
-		#"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
+			content	=> template("pxe/tftp_xinetd.erb");
+		"${tftp_root}": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755;
+		"${tftp_root}/pxelinux.0": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755,
+			source => "/usr/lib/syslinux/pxelinux.0",
+      require => Package["syslinux"];
+		"${tftp_root}/menu.c32": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755,
+			source => "/usr/lib/syslinux/menu.c32",
+      require => Package["syslinux"];
+		"${tftp_root}/memdisk": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755,
+			source => "/usr/lib/syslinux/memdisk",
+      require => Package["syslinux"];
+		"${tftp_root}/mboot.c32": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755,
+			source => "/usr/lib/syslinux/mboot.c32",
+      require => Package["syslinux"];
+		"${tftp_root}/chain.c32": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755,
+			source => "/usr/lib/syslinux/chain.c32",
+      require => Package["syslinux"];
+		"${tftp_root}/pxelinux.cfg": 
+      ensure => directory, 
+      owner => root, 
+      group => root, 
+      mode => 755;
+#		"${tftp_root}/images": 
+#      ensure => directory, 
+#      owner => root, 
+#      group => root, 
+#      mode => 755;
+#		#"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
 	}
 
 	service {
@@ -41,40 +78,25 @@ class pxe {
 			ensure => running,
 			enable => true;
 	}
+
+  Pxe::Images <| |>
+
+#file { $dirs: ensure => directory, owner => root, group => root, mode => 755, checksum => none; }
 	
-	$dirs = [
-		"${tftp_root}/images/centos",
-		"${tftp_root}/images/centos/i386",
-		"${tftp_root}/images/centos/x86_64",
-		"${tftp_root}/images/ubuntu",
-		"${tftp_root}/images/ubuntu/i386",
-		"${tftp_root}/images/ubuntu/amd64",
-	]
-	
-	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
-	
-	pxe::centos { 
-#		"centos_i386_4.8":
+#	pxe::centos { 
+##		"centos_i386_4.8":
+##			arch => "i386",
+##			ver => "4.8";
+##		"centos_x86_64_4.8":
+##			arch => "x86_64",
+##			ver => "4.8";
+#		"centos_i386_5.5":
 #			arch => "i386",
-#			ver => "4.8";
-#		"centos_x86_64_4.8":
+#			ver => "5.5";
+#		"centos_x86_64_5.5":
 #			arch => "x86_64",
-#			ver => "4.8";
-		"centos_i386_5.5":
-			arch => "i386",
-			ver => "5.5";
-		"centos_x86_64_5.5":
-			arch => "x86_64",
-			ver => "5.5";
-	}
-    
-    pxe::ubuntu {
-        "ubuntu lucid i386":
-            arch => "i386",
-            ver => "lucid";
-        "ubuntu lucid amd64":
-            arch => "amd64",
-            ver => "lucid";
-    }
+#			ver => "5.5";
+#	}
+#    
 
 }	
