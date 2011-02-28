@@ -1,5 +1,5 @@
 install 
-url --url http://urd.puppetlabs.lan/centos/<%=ver%>/os/<%=arch%>
+url --url http://urd.puppetlabs.lan/yum/centos/<%=ver%>/os/<%=arch%>
 cdrom
 lang en_US.UTF-8
 keyboard us
@@ -25,10 +25,9 @@ part /boot --fstype ext3 --size=100 --ondisk=sda
 part pv.2 --size=0 --grow --ondisk=sda
 volgroup systemvg pv.2
 logvol / --fstype ext3 --name=_slash --vgname=systemvg --size=1024 
-logvol /usr --fstype ext3 --name=_usr --vgname=systemvg --size=1024
+logvol /usr --fstype ext3 --name=_usr --vgname=systemvg --size=2048
 logvol /var --fstype ext3 --name=_var --vgname=systemvg --size=1024 
 logvol swap --fstype swap --name=_swap --vgname=systemvg --size=1024 --grow --maxsize=2048
-logvol /data --fstype ext3 --name=_data --vgname=systemvg --size=2048 --grow --maxsize=100000
 
 reboot
 

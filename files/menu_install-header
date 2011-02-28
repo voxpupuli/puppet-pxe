@@ -1,0 +1,6 @@
+MENU TITLE Installation Menu
+
+LABEL << Main Menu
+  KERNEL menu.c32
+  APPEND pxelinux.cfg/default
+

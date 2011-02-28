@@ -1,0 +1,6 @@
+MENU TITLE Ubuntu Installation
+
+LABEL << Install Menu
+  KERNEL menu.c32
+  APPEND pxelinux.cfg/menu_install
+
