@@ -15,3 +15,9 @@ pxe::bootstrap {
     arch       => "amd64",
 }
 
+pxe::host {
+  "server1.example.net":
+    hwaddr => "01-aa-bb-cc-dd-ee-ff",
+    bootstrap => "pxe/preseed-server1.example.net.erb",
+}
+
