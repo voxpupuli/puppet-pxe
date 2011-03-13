@@ -15,10 +15,10 @@ d-i console-setup/layoutcode string us
 ### Network configuration
 # netcfg will choose an interface that has link if possible. This makes it
 # skip displaying a list if there is more than one interface.
-d-i netcfg/choose_interface select auto
+#d-i netcfg/choose_interface select auto
 
 # To pick a particular interface instead:
-#d-i netcfg/choose_interface select eth1
+d-i netcfg/choose_interface select eth0
 
 # If you have a slow dhcp server and the installer times out waiting for
 # it, this might be useful.
@@ -63,7 +63,7 @@ d-i netcfg/wireless_wep string
 d-i mirror/country string manual
 d-i mirror/http/hostname string <%= mirror %>
 d-i mirror/http/directory string <%= mirror_directory %>
-<% if has_variable?(proxy) %>d-i mirror/http/proxy string <%= proxy %><%end%>
+<% if has_variable?("proxy") %>d-i mirror/http/proxy string <%= proxy %><%end%>
 
 # Alternatively: by default, the installer uses CC.archive.ubuntu.com where
 # CC is the ISO-3166-2 code for the selected country. You can preseed this
@@ -73,7 +73,7 @@ d-i mirror/http/directory string <%= mirror_directory %>
 # Suite to install.
 d-i mirror/suite string <%= ver %>
 # Suite to use for loading installer components (optional).
-d-i mirror/udeb/suite string <%= ver %
+d-i mirror/udeb/suite string <%= ver %>
 # Components to use for loading installer components (optional).
 d-i mirror/udeb/components multiselect main, restricted
 
@@ -154,7 +154,7 @@ d-i partman-auto/choose_recipe select multi
 
 # If you just want to change the default filesystem from ext3 to something
 # else, you can do that without providing a full recipe.
-#d-i partman/default_filesystem string ext4
+d-i partman/default_filesystem string ext4
 
 # This makes partman automatically partition without confirmation, provided
 # that you told it what to do using one of the methods above.
@@ -240,7 +240,7 @@ d-i apt-setup/security_path string /ubuntu
 #d-i debian-installer/allow_unauthenticated string true
 
 ### Package selection
-tasksel tasksel/first multiselect standard
+tasksel tasksel/first multiselect none
 #tasksel tasksel/first multiselect ubuntu-desktop
 #tasksel tasksel/first multiselect lamp-server, print-server
 #tasksel tasksel/first multiselect kubuntu-desktop
@@ -249,7 +249,7 @@ tasksel tasksel/first multiselect standard
 d-i pkgsel/include string openssh-server build-essential
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
-#d-i pkgsel/upgrade select none
+d-i pkgsel/upgrade select safe-upgrade
 
 # Language pack selection
 #d-i pkgsel/language-packs multiselect de, en, zh
