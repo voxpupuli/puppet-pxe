@@ -1,6 +1,6 @@
 class pxe ($tftp_root='/tftpboot'){
   include apache
-  include pxe::menu
+  include pxe::menu::default
 
   package {
     "xinetd":   ensure => installed;
