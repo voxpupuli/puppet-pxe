@@ -1,10 +1,23 @@
-class pxe::menu {
+define pxe::menu ($back='default',$back_name='|| Main Menu') {
+  include concat::setup
+  include pxe::menu::default
 
-  file { "$tftp_root/pxelinux.cfg/default":
-    owner  => root,
-    group  => root,
-    mode   => 644,
-    source => "puppet:///modules/pxe/default";
+  $target    = $title
+  $tftp_root = $::pxe::tftp_root
+  $fullpath  = "$tftp_root/pxelinux.cfg"
+  $prefix    = "pxelinux.cfg"
+
+  include pxe::menu::resources
+  Pxe::Menu <| title == $title |>
+  
+  concat::fragment { "menu_$name-header":
+    order => '00',
+    target => "$fullpath/$target",
+    content => template("pxe/menuentry-header.erb"),
   }
+
+  concat { "$fullpath/$target": }
+
+  #Concat <| target = "$fullpath/$target" |>
 
 }
