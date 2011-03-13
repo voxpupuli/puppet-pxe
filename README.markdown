@@ -29,6 +29,25 @@ The following class statement will get everything setup with default settings.  
 
     class { 'pxe::bootstrap::settings': }
 
+You may wish to change modify the to fit your environment.  A more robust example might look like the following.
+
+    class { 'pxe::bootstrap::settings':
+      location  => '/var/www/bootstrap',
+      ntpserver => "wall.znet",
+      rootpw    => 'changeme'
+    }
+
+Changes to the preseed file can be done with an entry like the this.
+  
+    pxe::bootstrap {
+      "maverick.cfg":
+        os         => "ubuntu",
+        ver        => "maverick",
+        proxy      => "http://apt-proxy.example.net:3142",
+        role       => "standard",
+    }
+
+
 
 ### Menuing System
 
