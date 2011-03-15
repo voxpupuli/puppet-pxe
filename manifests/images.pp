@@ -8,14 +8,22 @@ define pxe::images ($os,$ver,$arch) {
   File <| title == "$tftp_root/images/$os/$ver/$arch" |>
 
   case $os {
-    ubuntu: {
-      pxe::images::ubuntu {
-        "$os $ver $arch":
-          arch => "$arch",
-          ver => "$ver";
+    ubuntu,debian: {
+      $path    = "$ver/main/installer-$arch/current/images/netboot/$os-installer/$arch"
+      $baseurl = "http://mirrors.kernel.org/$os/dists"
+
+      exec {
+        "wget $os pxe linux $arch $ver":
+          cwd     => "$tftp_root/images/$os/$ver/$arch",
+          command => "/usr/bin/wget $baseurl/$path/linux",
+          creates => "$tftp_root/images/$os/$ver/$arch/linux";
+       "wget $os pxe initrd.img $arch $ver":
+          cwd     => "$tftp_root/images/$os/$ver/$arch",
+          command => "/usr/bin/wget $baseurl/$path/initrd.gz",
+          creates => "$tftp_root/images/$os/$ver/$arch/initrd.gz";
       }
     }
-    default: { err ("images for $os not configured") }
+    default: { err ("images for $os not configured")
   }
 }
 
