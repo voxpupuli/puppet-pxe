@@ -39,11 +39,22 @@ define pxe::bootstrap (
 
       $kernel = "images/ubuntu/$ver/$arch/linux"
       $initrd = "images/ubuntu/$ver/$arch/initrd.gz"
+      $buildcfg = "url=http://tork.znet/bootstrap/maverick.cfg"
+      $appendargs = [
+        "initrd=$initrd",
+        "auto",
+        "locale=en_US",
+        "console-setup/layoutcode=us",
+        "url=http://tork.znet/bootstrap/$ver.cfg",
+        "netcfg/get_hostname=unassigned-hostname",
+        "netcfg/choose_interface=eth0",
+        "text",
+      ]
 
       pxe::menu::entry { 
         "Ubuntu $altname $ver $arch Preseed Install":
           kernel => "$kernel",
-          append => "initrd=$initrd auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=unassigned-hostname url=http://tork.znet/bootstrap/maverick.cfg text",
+          append => inline_template("<% appendargs.each do |arg| %><%= arg %> <% end %>"),
           #initrd => "images/ubuntu/$ver/$arch/initrd.gz",
           target => "Install",
       }
