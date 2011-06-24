@@ -1,7 +1,12 @@
-define pxe::images ($os,$ver,$arch) {
+define pxe::images (
+    $os,
+    $ver,
+    $arch,
+    $baseurl = '' # must pass for rhel
+  ) {
   $tftp_root = $::pxe::tftp_root
   pxe::images::resources { "$os $ver $arch": }
-  
+
   File <| title == "$tftp_root/images" |>
   File <| title == "$tftp_root/images/$os" |>
   File <| title == "$tftp_root/images/$os/$ver" |>

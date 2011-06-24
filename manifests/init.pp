@@ -1,6 +1,6 @@
 class pxe ($tftp_root='/srv/tftp'){
   class { apache: }
-  class { tftp:               tftp_root => $tftp_root; }
+  class { tftp: tftp_root => $tftp_root; }
   class { "pxe::menu::default": tftp_root => $tftp_root; }
 
   package {

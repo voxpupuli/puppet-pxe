@@ -8,14 +8,15 @@ define pxe::bootstrap (
     $os,
     $ver,
     $proxy='',
+    $mirror='',
     $role='standard',
     $arch='amd64'
     ){
 
-  $tftpboot  = $pxe::tftpboot
-  $location  = $pxe::bootstrap::settings::location
-  $ntpserver = $pxe::bootstrap::settings::ntpserver
-  $rootpw    = $pxe::bootstrap::settings::rootpw
+#  $tftpboot  = $pxe::tftpboot
+#  $location  = $pxe::bootstrap::settings::location
+#  $ntpserver = $pxe::bootstrap::settings::ntpserver
+#  $rootpw    = $pxe::bootstrap::settings::rootpw
 
   include pxe::bootstrap::resources
   File  <| title == "$location" |>
@@ -58,6 +59,14 @@ define pxe::bootstrap (
           #initrd => "images/ubuntu/$ver/$arch/initrd.gz",
           target => "Install",
       }
+
+      file {
+        "$location/$name":
+          owner => root,
+          group => root,
+          mode  => 644,
+          content => template("pxe/preseed.cfg.erb");
+      }
     }
     debian:   {
       $mirror = 'http.us.debian.org'
@@ -68,23 +77,33 @@ define pxe::bootstrap (
         default:  { err ("$ver is not a supported version on $os") }
       }
     }
+    redhat: {
+      $testarch = ["x86_64","i386"]
+      $testver  = ["6","5","4"]
+      $pxe_redhat = {
+          arch    => $testarch,
+          ver     => $testver,
+#    baseurl => "http://yo.puppetlabs.lan/rhel_ver_server-_arch_/disc1"
+      }
+
+      pxe_expand('pxe::bootstrap::redhat', $pxe_redhat)
+
+#      pxe::bootstrap::redhat {
+#        "$os $ver $arch":
+#          arch    => $testarch,
+#          ver     => $testver,
+#          baseurl => "http://yo.puppetlabs.lan/rhel${altname}server-${arch}/disc1";
+#      }
+    }
     default: { err ("$os is not supported") } 
   }
 
-  file {
-    "$location/$name":
-      owner => root,
-      group => root,
-      mode  => 644,
-      content => template("pxe/preseed.cfg.erb");
-  }
-
-  @pxe::images {
-   "$os $ver $arch":
-      os   => $os,
-      ver  => $ver,
-      arch => $arch;
-  }
+#  @pxe::images {
+#   "$os $ver $arch":
+#      os   => $os,
+#      ver  => $ver,
+#      arch => $arch;
+#  }
 
 }
 
