@@ -1,6 +1,14 @@
 class pxe::params {
 
-	$tftp_root = "/tftpboot"
-	$ks_root = "/var/www/html/ks"
+  case $operatingsystem {
+    'freebsd': {
+      $syslinux_dir = '/usr/local/share/syslinux'
+    }
+    'debian','ubuntu': {
+      $syslinux_dir = '/usr/lib/syslinux'
+    }
+    default: {
+    }
+  }
 
 }

@@ -3,20 +3,21 @@
 
 define pxe::menu::menuentry (
     $kernel = 'menu.c32',
-    $target='default') {
+    $target='default',
+    $template = "pxe"menuentry.erb"
+  ) {
 
-  $label = $title
+  $label     = $title
   $tftp_root = $::pxe::tftp_root
-  $append = "pxelinux.cfg/$label"
+  $append    = "pxelinux.cfg/$label"
 
   include pxe::menu::resources
   Pxe::Menu <| title == $title |>
 
- 
   concat::fragment { "$target-menuentry-$title":
-    order => '10',
-    target => "$tftp_root/pxelinux.cfg/$target",
-    content => template("pxe/menuentry.erb"),
-  } 
+    order   => '10',
+    target  => "$tftp_root/pxelinux.cfg/$target",
+    content => template("$template"),
+  }
 
 }

@@ -1,7 +1,6 @@
-class pxe::menu::default {
+class pxe::menu::default ($tftp_root){
 
   $target    = 'default'
-  $tftp_root = $::pxe::tftp_root
   $fullpath  = "$tftp_root/pxelinux.cfg"
 
   concat::fragment { "menu_default-header":
