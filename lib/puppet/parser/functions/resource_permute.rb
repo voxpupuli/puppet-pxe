@@ -1,8 +1,8 @@
-Puppet::Parser::Functions::newfunction(:hashme) do |args|
+Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
 
   Puppet::Parser::Functions.autoloader.loadall
 
-  raise ArgumentError, ("myfunction(): wrong number of arguments (#{args.length}; must be 2)") if args.length != 2
+  raise ArgumentError, ("resource_permute(): wrong number of arguments (#{args.length}; must be 2)") if args.length != 2
 
   rec_type = args[0]
   hash = args[1]
