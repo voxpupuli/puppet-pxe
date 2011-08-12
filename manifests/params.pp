@@ -1,14 +1,7 @@
 class pxe::params {
 
-  case $operatingsystem {
-    'freebsd': {
-      $syslinux_dir = '/usr/local/share/syslinux'
-    }
-    'debian','ubuntu': {
-      $syslinux_dir = '/usr/lib/syslinux'
-    }
-    default: {
-    }
-  }
+  $syslinux_archive = "http://www.kernel.org/pub/linux/utils/boot/syslinux/4.xx/syslinux-4.04.tar.gz"
+  $syslinux_dir="/usr/local/src/syslinux-4.04"
 
 }
+
