@@ -1,6 +1,10 @@
 define pxe::images ($os,$ver,$arch) {
   $tftp_root = $::pxe::tftp_root
-  pxe::images::resources { "$os $ver $arch": }
+  pxe::images::resources { "$os $ver $arch": 
+    os   => $os,
+    ver  => $ver,
+    arch => $arch;
+  }
 
   File <| title == "$tftp_root/images" |>
   File <| title == "$tftp_root/images/$os" |>
