@@ -4,7 +4,7 @@
 define pxe::menu::menuentry (
     $kernel = 'menu.c32',
     $target='default',
-    $template = "pxe"menuentry.erb"
+    $template = "pxe_menuentry.erb"
   ) {
 
   $label     = $title

@@ -1,7 +1,5 @@
 class pxe ($tftp_root='/srv/tftp'){
 
-  class { "pxe::menu::default": tftp_root => $tftp_root; }
-
   include pxe::params
 
   $syslinux_dir     = $pxe::params::syslinux_dir
@@ -39,6 +37,10 @@ class pxe ($tftp_root='/srv/tftp'){
       owner     => root,
       group     => 0,
       mode      => 755;
+  }
+
+  pxe::menu {
+    "default":
   }
 
 }
