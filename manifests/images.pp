@@ -12,11 +12,12 @@ define pxe::images ($os,$ver,$arch) {
   File <| title == "$tftp_root/images/$os/$ver/$arch" |>
 
   case $os {
-    ubuntu: {
-      pxe::images::ubuntu {
+    debian,ubuntu: {
+      pxe::images::debian {
         "$os $ver $arch":
           arch => "$arch",
-          ver => "$ver";
+          ver  => "$ver",
+          os   => "$os";
       }
     }
     default: { err ("images for $os not configured") }
