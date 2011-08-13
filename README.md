@@ -11,7 +11,7 @@ Features
 Future Work
 -----------
   * Improve menu system
-  * Add support OEL, Sci-Linux
+  * Add support OEL, Sci-Linux, etc
 
 Placeholder
 -----------
@@ -20,28 +20,37 @@ Placeholder
 Usage
 -----
 ### Basic usage
-The following class statement will get everything setup with default settings.  See the class pxe::bootstrap::settings for more information on customization of overrides.
 
-    class { 'pxe::bootstrap::settings': }
-
-You may wish to change modify the to fit your environment.  A more robust example might look like the following.
-
-    class { 'pxe::bootstrap::settings':
-      location  => '/var/www/bootstrap',
-      ntpserver => "wall.znet",
-      rootpw    => 'changeme'
+    $ubuntu = {
+      "arch" => ["amd64","i386"],
+      "ver"  => ["hardy","karmic","lucid","maverick","natty","oneiric"],
+      "os"   => "ubuntu"
     }
 
-Changes to the preseed file can be done with an entry like the this.
-  
-    pxe::bootstrap {
-      "maverick.cfg":
-        os         => "ubuntu",
-        ver        => "maverick",
-        proxy      => "http://apt-proxy.example.net:3142",
-        role       => "standard",
+    $debian = {
+      "arch" => ["amd64","i386"],
+      "ver"  => ["lenny","squeeze","wheezy"],
+      "os"   => "debian"
+    }
+    $centos = {
+      "arch" => ["x86_64","i386"],
+      "ver"  => [4,5,6],
+      "os"   => "centos"
+    }
+    $redhat = {
+      "arch" => ["x86_64","i386"],
+      "ver"  => 6,
+      "os"   => "redhat"
     }
 
+    $redhat_common = {
+      "baseurl" => "http://mirror.dyr.den/rhel<%= ver %>server-<%= arch %>/disc1/images/pxeboot"
+    }
+
+    resource_permute('pxe::images', $ubuntu)
+    resource_permute('pxe::images', $debian)
+    resource_permute('pxe::images', $centos)
+    resource_permute('pxe::images', $redhat, $redhat_common)
 
 
 ### Menuing System
