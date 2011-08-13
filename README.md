@@ -1,25 +1,20 @@
 Puppet PXE
 ==========
-Manage a PXE server for assisting in automated network installations.
+Deploy PXE boot images for network installations.
 
 Features
 --------
-  * Installation and configuration of tftp through the use of xinetd
-  * Automated kernel and initrd image managemnt for network installations
-  * Limited preseed and kickstart configuration and deployment
-  * Basic menu system for selection of installation type
+  * Automatic image downloading
+  * Menu management
+  * Supports Debian, Ubuntu, CentOS and Ret Hat (with `baseurl`)
 
 Future Work
 -----------
   * Improve menu system
-  * Add support for debian, centos
-  * Add disk layout support for bootstrap configurations
-  * Host specific pxelinux configuration creation
+  * Add support OEL, Sci-Linux
 
 Placeholder
 -----------
-  * retire use of class { 'pxe'... in favor of bootstrap::resources
-  * retire pxe::menu in favor of bootstrap::resources
   * pxe::menu::menuentry should accept 'target' param for concat building
 
 Usage
