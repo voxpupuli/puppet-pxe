@@ -1,11 +1,10 @@
-define pxe::images (
-    $os,
-    $ver,
-    $arch,
-    $baseurl = '' # must pass for rhel
-  ) {
+define pxe::images ($os,$ver,$arch,$baseurl='') {
   $tftp_root = $::pxe::tftp_root
-  pxe::images::resources { "$os $ver $arch": }
+  pxe::images::resources { "$os $ver $arch": 
+    os   => $os,
+    ver  => $ver,
+    arch => $arch;
+  }
 
   File <| title == "$tftp_root/images" |>
   File <| title == "$tftp_root/images/$os" |>
@@ -13,22 +12,44 @@ define pxe::images (
   File <| title == "$tftp_root/images/$os/$ver/$arch" |>
 
   case $os {
-    ubuntu,debian: {
-      $path    = "$ver/main/installer-$arch/current/images/netboot/$os-installer/$arch"
-      $baseurl = "http://mirrors.kernel.org/$os/dists"
-
-      exec {
-        "wget $os pxe linux $arch $ver":
-          cwd     => "$tftp_root/images/$os/$ver/$arch",
-          command => "/usr/bin/wget $baseurl/$path/linux",
-          creates => "$tftp_root/images/$os/$ver/$arch/linux";
-       "wget $os pxe initrd.img $arch $ver":
-          cwd     => "$tftp_root/images/$os/$ver/$arch",
-          command => "/usr/bin/wget $baseurl/$path/initrd.gz",
-          creates => "$tftp_root/images/$os/$ver/$arch/initrd.gz";
+    debian,ubuntu: {
+      pxe::images::debian {
+        "$os $ver $arch":
+          arch    => "$arch",
+          ver     => "$ver",
+          os      => "$os",
+          baseurl => $baseurl ? {
+            ''      => undef,
+            default => $baseurl
+          };
       }
     }
-    default: { err ("images for $os not configured")
+    centos: {
+      pxe::images::centos {
+        "$os $ver $arch":
+          arch    => "$arch",
+          ver     => "$ver",
+          os      => "$os",
+          baseurl => $baseurl ? {
+            ''      => undef,
+            default => $baseurl
+          };
+      }
+    }
+    redhat: {
+      pxe::images::redhat {
+        "$os $ver $arch":
+          arch    => "$arch",
+          ver     => "$ver",
+          os      => "$os",
+          baseurl => $baseurl ? {
+            ''      => undef,
+            default => $baseurl
+          };
+      }
+    }
+
+    default: { err ("images for $os not configured") }
   }
 }
 

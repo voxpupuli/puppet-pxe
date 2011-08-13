@@ -1,7 +1,5 @@
 class pxe::menu::default ($tftp_root){
 
-  include concat::setup
-
   $target    = 'default'
   $fullpath  = "$tftp_root/pxelinux.cfg"
 

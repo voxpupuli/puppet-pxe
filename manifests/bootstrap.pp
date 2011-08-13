@@ -27,10 +27,10 @@ define pxe::bootstrap (
 
   case $os {
     ubuntu:   {
-      $mirror = 'archive.ubuntu.com'
+      $mirror           = 'archive.ubuntu.com'
+      $secmirror        = 'security.ubuntu.com'
+      $secmirror_path   = '/ubuntu'
       $mirror_directory = '/ubuntu'
-      $secmirror = 'security.ubuntu.com'
-      $secmirror_path = '/ubuntu'
 
       case $ver {
         maverick: { $altname = "10.10"}
