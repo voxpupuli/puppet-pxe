@@ -9,6 +9,8 @@ define pxe::images::centos(
 
   if $baseurl == '' {
     $srclocation = "http://mirrors.kernel.org/$os/$ver/os/$arch/images/pxeboot"
+  } else {
+    $srclocation = inline_template($baseurl)
   }
 
   exec {
