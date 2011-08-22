@@ -32,10 +32,19 @@ $scientific = {
 $scientific_common = {
   "baseurl" => "http://mirror.yellowfiber.net/scientific/<%= ver %>/<%= arch %>/os/images/pxeboot/"
 }
+$fedora = {
+  "arch" => ["x86_64","i386"],
+  "ver"  => "15",
+  "os"   => "fedora"
+}
+$fedora_common = {
+  "baseurl" => "http://mirrors.kernel.org/fedora/releases/<%= ver %>/Fedora/<%= arch %>/os/images/pxeboot/"
+}
 
 resource_permute('pxe::images', $ubuntu)
 resource_permute('pxe::images', $debian)
 resource_permute('pxe::images', $centos)
 resource_permute('pxe::images', $redhat, $redhat_common)
 resource_permute('pxe::images', $scientific, $scientific_common)
+resource_permute('pxe::images', $fedora, $fedora_common)
 
