@@ -10,8 +10,9 @@ class pxe ($tftp_root='/srv/tftp'){
   }
 
   exec { "syslinux_install":
+    path    => ["/usr/bin", "/usr/local/bin"],
     cwd     => "/usr/local/src",
-    command => "/usr/bin/wget $syslinux_archive; tar -xzf syslinux-4.04.tar.gz",
+    command => "wget $syslinux_archive; tar -xzf syslinux-4.04.tar.gz",
     creates => "/usr/local/src/syslinux-4.04",
   }
 
