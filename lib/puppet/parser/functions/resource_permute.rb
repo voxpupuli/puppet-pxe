@@ -44,7 +44,7 @@ Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
     end
     blag = {}
     blag["#{title}"] = cfg
-    function_create_resources(rec_type,blag)
+    function_create_resources([rec_type,blag])
   end
 
 end
