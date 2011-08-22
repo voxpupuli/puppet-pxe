@@ -24,7 +24,7 @@ define pxe::images ($os,$ver,$arch,$baseurl='') {
           };
       }
     }
-    centos: {
+    centos,fedora,scientific: {
       pxe::images::centos {
         "$os $ver $arch":
           arch    => "$arch",
