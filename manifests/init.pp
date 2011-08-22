@@ -16,7 +16,7 @@ class pxe ($tftp_root='/srv/tftp'){
     creates => "/usr/local/src/syslinux-4.04",
   }
 
-  Pxe::Images <| |>
+  #Pxe::Images <| |>
 
   file {
     "${tftp_root}/pxelinux.0":
