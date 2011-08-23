@@ -1,7 +1,9 @@
-class pxe::menu::default ($tftp_root){
+class pxe::menu::default {
 
   $target    = 'default'
   $fullpath  = "$tftp_root/pxelinux.cfg"
+
+
 
   concat::fragment { "menu_default-header":
     order  => '00',
