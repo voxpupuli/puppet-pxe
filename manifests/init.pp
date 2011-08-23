@@ -16,8 +16,6 @@ class pxe ($tftp_root='/srv/tftp'){
     creates => "/usr/local/src/syslinux-4.04",
   }
 
-  Pxe::Images <| |>
-
   file {
     "${tftp_root}/pxelinux.0":
       ensure    => directory,
@@ -38,10 +36,6 @@ class pxe ($tftp_root='/srv/tftp'){
       owner     => root,
       group     => 0,
       mode      => 755;
-  }
-
-  pxe::menu {
-    "default":
   }
 
 }

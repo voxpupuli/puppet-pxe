@@ -1,7 +1,7 @@
 define pxe::images::centos(
     $arch,
     $ver,
-    $os,
+    $os = "centos",
     $baseurl = ''
   ) {
 
