@@ -46,8 +46,8 @@ Usage
 
     pxe::menu {
       'Main Menu':
-        file     => "default",
-        template => "pxe/menu_default.erb";
+        file      => "default",
+        template  => "pxe/menu_default.erb";
     }
 
     pxe::menu::entry {
@@ -58,7 +58,7 @@ Usage
 
     pxe::menu {
       'Operating System ($arch)':
-        file        => "menu_install",
+        file  => "menu_install",
     }
 
     pxe::menu::entry {
@@ -69,7 +69,7 @@ Usage
 
     pxe::menu {
       'Debian':
-        file        => "os_debian",
+        file  => "os_debian",
     }
 
     pxe::menu::entry {
