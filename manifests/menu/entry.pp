@@ -1,16 +1,19 @@
-define pxe::menu::entry ($kernel,$append,$target) {
+define pxe::menu::entry (
+  $order    ='10',
+  $kernel   = "menu.c32",
+  $append,
+  $file,
+  $template = "pxe/menuentry.erb") {
 
   $tftp_root = $::pxe::tftp_root
-  $label = $title 
+  $fullpath  = "$tftp_root/pxelinux.cfg"
 
-  include pxe::menu::resources
-  Pxe::Menu <| title == $title |>
-  
   concat::fragment { "$target-menu-entry-$title":
-    order => '10',
-    target => "$tftp_root/pxelinux.cfg/$target",
+    order   => $order,
+    target  => "$fullpath/$file",
     content => template("pxe/menuentry.erb"),
-  } 
-  
+  }
+
 
 }
+
