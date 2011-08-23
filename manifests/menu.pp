@@ -12,7 +12,7 @@ define pxe::menu (
   $tftp_root = $::pxe::tftp_root
   $fullpath  = "$tftp_root/pxelinux.cfg"
 
-  concat::fragment { "menu_$name-header":
+  concat::fragment { "menu_${file}-header":
     order   => '00',
     target  => "$fullpath/$file",
     content => template("$template"),
