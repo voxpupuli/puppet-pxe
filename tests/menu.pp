@@ -41,10 +41,10 @@ pxe::menu::entry {
 #  ver  => "squeeze",
 #}
 
-$debian_common = {
-  file   => "os_debian",
-  kernel => 'images/debian/<%= arch %>/squeeze/linux'
-}
+#$debian_common = {
+#  file   => "os_debian",
+#  kernel => 'images/debian/<%= arch %>/squeeze/linux'
+#}
 
 #resource_permute('pxe::menu::entry', $debian, $debian_common)
 

@@ -5,10 +5,6 @@ class pxe ($tftp_root='/srv/tftp'){
   $syslinux_dir     = $pxe::params::syslinux_dir
   $syslinux_archive = $pxe::params::syslinux_archive
 
-  file { $tftp_root:
-    ensure => directory,
-  }
-
   exec { "syslinux_install":
     path    => ["/usr/bin", "/usr/local/bin"],
     cwd     => "/usr/local/src",
