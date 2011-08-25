@@ -6,7 +6,7 @@ class pxe ($tftp_root='/srv/tftp'){
   $syslinux_archive = $pxe::params::syslinux_archive
 
   exec { "syslinux_install":
-    path    => ["/usr/bin", "/usr/local/bin"],
+    path    => ["/bin", "/usr/bin", "/usr/local/bin"],
     cwd     => "/usr/local/src",
     command => "wget $syslinux_archive; tar -xzf syslinux-4.04.tar.gz",
     creates => "/usr/local/src/syslinux-4.04",
