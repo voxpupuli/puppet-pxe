@@ -14,6 +14,8 @@ Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
   hash        = args[1]
   common_hash = args[2]
 
+  # Class borrowed from:
+  # https://github.com/lucasdicioccio/laborantin/blob/master/lib/laborantin/core/parameter_hash.rb
   class ParameterHash < Hash
     # Recursively yields all the possible configurations of parameters (a new hash).
     # No order is supported on the recursion, and it is not planned to.
