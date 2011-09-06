@@ -11,32 +11,39 @@ $debian = {
   "ver"  => ["lenny","squeeze","wheezy"],
   "os"   => "debian"
 }
+
 $centos = {
   "arch" => ["x86_64","i386"],
   "ver"  => [4,5,6],
   "os"   => "centos"
 }
+
 $redhat = {
   "arch" => ["x86_64","i386"],
   "ver"  => 6,
   "os"   => "redhat"
 }
+
 $redhat_common = {
   "baseurl" => "http://yo.puppetlabs.lan/rhel<%= ver %>server-<%= arch %>/disc1/images/pxeboot"
 }
+
 $scientific = {
   "arch" => ["x86_64","i386"],
   "ver"  => "6.0",
   "os"   => "scientific"
 }
+
 $scientific_common = {
   "baseurl" => "http://mirror.yellowfiber.net/scientific/<%= ver %>/<%= arch %>/os/images/pxeboot/"
 }
+
 $fedora = {
   "arch" => ["x86_64","i386"],
   "ver"  => "15",
   "os"   => "fedora"
 }
+
 $fedora_common = {
   "baseurl" => "http://mirrors.kernel.org/fedora/releases/<%= ver %>/Fedora/<%= arch %>/os/images/pxeboot/"
 }
