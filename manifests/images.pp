@@ -1,6 +1,16 @@
-define pxe::images ($os,$ver,$arch,$baseurl='') {
+define pxe::images (
+    $os,
+    $ver,
+    $arch,
+    $baseurl = '',
+    $menu    = true
+  ) {
+
   $tftp_root = $::pxe::tftp_root
-  pxe::images::resources { "$os $ver $arch": 
+  $os_cap    = inline_template("<%= os.capitalize %>")
+
+  # Setup directory pathing
+  pxe::images::resources { "$os $ver $arch":
     os   => $os,
     ver  => $ver,
     arch => $arch;
@@ -11,8 +21,27 @@ define pxe::images ($os,$ver,$arch,$baseurl='') {
   File <| title == "$tftp_root/images/$os/$ver" |>
   File <| title == "$tftp_root/images/$os/$ver/$arch" |>
 
+  # If menu is enabled, build it out
+  if $menu == true {
+
+    Pxe::Menu <| |>
+    Pxe::Menu::Entry <| |>
+
+  }
+
+
+  # Grab the images needed
   case $os {
     debian,ubuntu: {
+
+    if !defined(Pxe::Menu::Entry["$os_cap $ver $arch Installation"]) {
+      @pxe::menu::entry {
+        "$os_cap $ver $arch Installation":
+          file    => "os_${os}",
+          kernel  => "images/$os/$arch/$ver/linux",
+          append  => "vga=791 initrd=images/$os/$arch/$ver/initrd.gz",
+      }
+    }
       pxe::images::debian {
         "$os $ver $arch":
           arch    => "$arch",
