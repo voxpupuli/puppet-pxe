@@ -36,15 +36,20 @@ pxe::menu::entry {
     append  => "vga=791 initrd=images/debian/i386/squeeze/squeeze.gz",
 }
 
+
+# How I want it to be
+
 #$debian = {
 #  arch => ["x86_64","i386"],
 #  ver  => "squeeze",
 #}
-
+#
 #$debian_common = {
-#  file   => "os_debian",
-#  kernel => 'images/debian/<%= arch %>/squeeze/linux'
+#  file    => 'os_<%= os %>',
+#  kernel  => 'images/debian/<%= arch %>/<%= ver %>/linux',
+#  append  => 'vga=791 initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/debian_base.cfg text',
 #}
-
+#
 #resource_permute('pxe::menu::entry', $debian, $debian_common)
+#
 
