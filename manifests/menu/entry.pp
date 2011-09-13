@@ -1,3 +1,15 @@
+# Class: pxe::menu::entry
+#
+# This class installs and configures the Puppet Labs base classes
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 define pxe::menu::entry (
   $order    ='10',
   $kernel   = "menu.c32",
