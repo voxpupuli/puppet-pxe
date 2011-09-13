@@ -1,6 +1,6 @@
 # Class: pxe::menu::entry
 #
-# This class installs and configures the Puppet Labs base classes
+# This is a utility class for creating menu entries for pxe booting.
 #
 # Parameters:
 #
