@@ -1,3 +1,15 @@
+# Define: pxe::images::resources
+#
+# This define creates a series of resources that are used in other defines.  The reason for this class is to allow `include pxe::images::resources` in classes/defines where you will need a given resource more than once.  This merely facilitates the createtion of virtual resources for realization in other parts of the code.
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 define pxe::images::resources (
     $os,
     $ver,
