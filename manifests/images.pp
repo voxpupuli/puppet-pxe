@@ -1,3 +1,21 @@
+# Define: pxe::images
+#
+# This is the control class for grabbing pxe network boot images.  Simlar distros are lumped together because the logic in the sub-define is the same.
+#
+# Parameters:
+#   os: the name of the os to use in urls when grabbing images and building the tftp directory structure
+#   ver:
+#   arch:
+#   baseurl:
+#
+# Actions:
+#   * Create directory structure for tftp images
+#   * Download images from public mirrors or private locations ( set by baseurl )
+#
+# Requires:
+#
+# Sample Usage:
+#
 define pxe::images (
     $os,
     $ver,
@@ -23,25 +41,13 @@ define pxe::images (
 
   # If menu is enabled, build it out
   if $menu == true {
-
     Pxe::Menu <| |>
     Pxe::Menu::Entry <| |>
-
   }
-
 
   # Grab the images needed
   case $os {
     debian,ubuntu: {
-
-    if !defined(Pxe::Menu::Entry["$os_cap $ver $arch Installation"]) {
-      @pxe::menu::entry {
-        "$os_cap $ver $arch Installation":
-          file    => "os_${os}",
-          kernel  => "images/$os/$arch/$ver/linux",
-          append  => "vga=791 initrd=images/$os/$arch/$ver/initrd.gz",
-      }
-    }
       pxe::images::debian {
         "$os $ver $arch":
           arch    => "$arch",
