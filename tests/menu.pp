@@ -28,28 +28,29 @@ pxe::menu {
     file        => "os_debian",
 }
 
-pxe::menu::entry {
-  "Debian 6 squeeze i386 Installation":
-    file    => "os_debian",
-    kernel  => "images/debian/i386/squeeze/squeeze",
-    #append => "vga=normal initrd=images/debian/i386/squeeze/squeeze.gz",
-    append  => "vga=791 initrd=images/debian/i386/squeeze/squeeze.gz",
-}
+#pxe::menu::entry {
+#  "Debian 6 squeeze i386 Installation":
+#    file    => "os_debian",
+#    kernel  => "images/debian/i386/squeeze/squeeze",
+#    #append => "vga=normal initrd=images/debian/i386/squeeze/squeeze.gz",
+#    append  => "vga=791 initrd=images/debian/i386/squeeze/squeeze.gz",
+#}
 
 
 # How I want it to be
 
 #$debian = {
-#  arch => ["x86_64","i386"],
-#  ver  => "squeeze",
+#  "arch" => ["amd64","i386"],
+#  "ver"  => ["lenny","squeeze","wheezy"],
+#  "os"   => "debian"
 #}
 #
-#$debian_common = {
-#  file    => 'os_<%= os %>',
-#  kernel  => 'images/debian/<%= arch %>/<%= ver %>/linux',
-#  append  => 'vga=791 initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/debian_base.cfg text',
+#$debian_menu = {
+#  file    => "os_<%= os %>",
+#  kernel  => "images/debian/<%= arch %>/<%= ver %>/linux",
+#  append  => "vga=791 initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/debian_base.cfg text",
 #}
 #
-#resource_permute('pxe::menu::entry', $debian, $debian_common)
+#resource_permute('pxe::menu::zentry', $debian, $debian_menu)
 #
 
