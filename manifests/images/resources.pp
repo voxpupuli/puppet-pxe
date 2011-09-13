@@ -45,7 +45,7 @@ define pxe::images::resources (
   if ! defined(Pxe::Menu['System Installs']) {
     pxe::menu {
       'System Installs':
-        file        => "menu_install",
+        file  => "menu_install",
     }
   }
 
@@ -60,7 +60,7 @@ define pxe::images::resources (
   if ! defined(Pxe::Menu["$os_cap"]) { # we will arrive here more than once, avoid dupes
     @pxe::menu {
       "$os_cap":
-        file        => "os_${os}",
+        file  => "os_${os}",
     }
   }
 
