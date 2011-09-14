@@ -1,4 +1,4 @@
-# Class: pxe::menu::installentry
+# Define: pxe::menu::installentry
 #
 # This will create an entry, but also accepts things like arch and version
 #
