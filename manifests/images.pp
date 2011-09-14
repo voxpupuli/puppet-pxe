@@ -20,8 +20,7 @@ define pxe::images (
     $os,
     $ver,
     $arch,
-    $baseurl = '',
-    $menu    = true
+    $baseurl = ''
   ) {
 
   $tftp_root = $::pxe::tftp_root
@@ -39,11 +38,6 @@ define pxe::images (
   File <| title == "$tftp_root/images/$os/$ver" |>
   File <| title == "$tftp_root/images/$os/$ver/$arch" |>
 
-  # If menu is enabled, build it out
-  if $menu == true {
-    Pxe::Menu <| |>
-    Pxe::Menu::Entry <| |>
-  }
 
   # Grab the images needed
   case $os {
