@@ -7,7 +7,11 @@ define pxe::images::debian(
 # This assumes debian as an os, but it works equally for os="ubuntu"
 
   if $baseurl == '' {
-    $srclocation = "http://mirrors.kernel.org/$os/dists"
+    case $os {
+      "debian": { $srclocation = "http://ftp.debian.org/$os/dists" }
+      "ubuntu": { $srclocation = "http://archive.ubuntu.com/$os/dists" }
+      default:  { $srclocation = "http://mirrors.kernel.org/$os/dists" }
+    }
   }
 
   # http://mirrors.kernel.org/debian/dists/lucid/main/installer-amd64/current/images/netboot/debian-installer/amd64/
