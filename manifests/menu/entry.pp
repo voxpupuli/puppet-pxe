@@ -11,14 +11,20 @@
 # Sample Usage:
 #
 define pxe::menu::entry (
-  $order    ='10',
-  $kernel   = "menu.c32",
-  $append,
-  $file,
-  $template = "pxe/menuentry.erb") {
+    $template = "pxe/menuentry.erb",
+    $order    ='10',
+    $kernel   = "menu.c32",
+    $append,
+    $file,
+    $label    = ''
+) {
+
+  if $menutitle == '' {
+    $label = $title
+  }
 
   $tftp_root = $::pxe::tftp_root
-  $fullpath  = "$tftp_root/pxelinux.cfg"
+  $fullpath  = "${tftp_root}/pxelinux.cfg"
 
   concat::fragment { "$target-menu-entry-$title":
     order   => $order,
