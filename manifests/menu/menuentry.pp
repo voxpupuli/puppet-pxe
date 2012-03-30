@@ -2,12 +2,16 @@
 # This module will create a sub-menu entry in the given $target
 
 define pxe::menu::menuentry (
-    $kernel = 'menu.c32',
-    $target='default',
-    $template = "pxe_menuentry.erb"
+    $menutitle = '',
+    $kernel    = 'menu.c32',
+    $target    = 'default',
+    $template  = "pxe_menuentry.erb"
   ) {
 
-  $label     = $title
+  if $menutitle == '' {
+    $label = $title
+  }
+
   $tftp_root = $::pxe::tftp_root
   $append    = "pxelinux.cfg/$label"
 
