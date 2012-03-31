@@ -21,25 +21,25 @@ define pxe::images (
     $ver,
     $arch,
     $baseurl = ''
-  ) {
+) {
 
   $tftp_root = $::pxe::tftp_root
   $os_cap    = inline_template("<%= os.capitalize %>")
 
-  # Setup directory pathing
+  # Export the resources needed by all classes
   pxe::images::resources { "$os $ver $arch":
     os   => $os,
     ver  => $ver,
     arch => $arch;
   }
 
+  # Realize some directories
   File <| title == "$tftp_root/images" |>
   File <| title == "$tftp_root/images/$os" |>
   File <| title == "$tftp_root/images/$os/$ver" |>
   File <| title == "$tftp_root/images/$os/$ver/$arch" |>
 
-
-  # Grab the images needed
+  # Download the images
   case $os {
     debian,ubuntu: {
       pxe::images::debian {

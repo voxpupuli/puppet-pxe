@@ -11,16 +11,22 @@
 # Sample Usage:
 #
 define pxe::menu::installentry (
-  $order    ='10',
-  $kernel,
-  $append,
-  $file,
-  $arch,
-  $os,
-  $ver,
-  $template = "pxe/menuinstallentry.erb") {
+    $order     ='10',
+    $kernel,
+    $append,
+    $file,
+    $arch,
+    $os,
+    $ver,
+    $template  = "pxe/menuinstallentry.erb",
+    $menutitle = ''
+) {
 
   include concat::setup
+
+  if $menutitle == '' {
+    $label = $title
+  }
 
   $tftp_root = $::pxe::tftp_root
   $fullpath  = "$tftp_root/pxelinux.cfg"
