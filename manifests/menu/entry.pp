@@ -11,16 +11,18 @@
 # Sample Usage:
 #
 define pxe::menu::entry (
-    $template = "pxe/menuentry.erb",
-    $order    ='10',
-    $kernel   = "menu.c32",
+    $template   = "pxe/menuentry.erb",
+    $order      ='10',
+    $kernel     = "menu.c32",
     $append,
     $file,
-    $label    = ''
+    $menuetitle = ''
 ) {
 
   if $menutitle == '' {
     $label = $title
+  } else {
+    $label = $menutitle
   }
 
   $tftp_root = $::pxe::tftp_root
