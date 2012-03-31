@@ -3,9 +3,10 @@
 
 define pxe::menu (
     $file,
-    $back        = "Main Menu",
-    $append      = "pxelinux.cfg/default",
-    $template    = "pxe/menu.erb") {
+    $back     = "Main Menu",
+    $append   = "pxelinux.cfg/default",
+    $template = "pxe/menu.erb"
+) {
 
   include concat::setup
 
