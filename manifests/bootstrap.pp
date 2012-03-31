@@ -1,3 +1,6 @@
+# This define is a wrapper to do two things:
+# * download the image files
+# * setup a generic an installation entry for each image
 define pxe::bootstrap (
     $os,
     $ver,
@@ -7,12 +10,12 @@ define pxe::bootstrap (
     $file,
     $kernel,
     $append
-  ){
+){
 
   # If menu is enabled, build it out
   if $menu == true {
-    Pxe::Menu <| |>
-    Pxe::Menu::Entry <| |>
+    Pxe::Menu <||>
+    Pxe::Menu::Entry <||>
   }
 
   pxe::images {
