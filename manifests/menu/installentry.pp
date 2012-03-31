@@ -26,6 +26,8 @@ define pxe::menu::installentry (
 
   if $menutitle == '' {
     $label = $title
+  } else {
+    $label = $menutitle
   }
 
   $tftp_root = $::pxe::tftp_root
