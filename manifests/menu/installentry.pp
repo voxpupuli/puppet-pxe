@@ -36,8 +36,9 @@ define pxe::menu::installentry (
   $menu_file     = inline_template($file)
   $append_string = inline_template($append)
   $kernel_string = inline_template($kernel)
+  $label_string  = inline_template($label)
 
-  concat::fragment { "install-menu-${label}":
+  concat::fragment { "install-menu-${label_string}":
     order   => $order,
     target  => "$fullpath/$menu_file",
     content => template("pxe/menuinstallentry.erb"),
