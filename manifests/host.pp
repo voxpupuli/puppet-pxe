@@ -24,7 +24,6 @@ define pxe::host (
     "$hwaddr": 
       kernel => "$kernel",
       append => inline_template("<% appendargs.each do |arg| %><%= arg %> <% end %>"),
-      
   }
 
 }

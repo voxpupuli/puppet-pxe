@@ -11,16 +11,24 @@
 # Sample Usage:
 #
 define pxe::menu::installentry (
-  $order    ='10',
-  $kernel,
-  $append,
-  $file,
-  $arch,
-  $os,
-  $ver,
-  $template = "pxe/menuinstallentry.erb") {
+    $order     ='10',
+    $kernel,
+    $append,
+    $file,
+    $arch,
+    $os,
+    $ver,
+    $template  = "pxe/menuinstallentry.erb",
+    $menutitle = ''
+) {
 
   include concat::setup
+
+  if $menutitle == '' {
+    $label = $title
+  } else {
+    $label = $menutitle
+  }
 
   $tftp_root = $::pxe::tftp_root
   $fullpath  = "$tftp_root/pxelinux.cfg"
@@ -28,8 +36,9 @@ define pxe::menu::installentry (
   $menu_file     = inline_template($file)
   $append_string = inline_template($append)
   $kernel_string = inline_template($kernel)
+  $label_string  = inline_template($label)
 
-  concat::fragment { "install-menu-${os}-${ver}-${arch}":
+  concat::fragment { "install-menu-${label_string}":
     order   => $order,
     target  => "$fullpath/$menu_file",
     content => template("pxe/menuinstallentry.erb"),

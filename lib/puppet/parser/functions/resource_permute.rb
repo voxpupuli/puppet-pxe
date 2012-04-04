@@ -1,5 +1,4 @@
 Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
-
   Puppet::Parser::Functions.autoloader.loadall
 
   require 'erb'
@@ -38,7 +37,8 @@ Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
 
   params = ParameterHash.new.replace(hash)
   params.each_config do |cfg|
-    title = "#{cfg["os"]} #{cfg["ver"]} #{cfg["arch"]}"
+    #title = "#{cfg["os"]} #{cfg["ver"]} #{cfg["arch"]}"
+    title = cfg
     if common_hash.is_a?(Hash)
       common_hash.keys.each do |key|
         cfg["#{key}"] = common_hash["#{key}"]
