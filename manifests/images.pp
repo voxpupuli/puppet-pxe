@@ -17,10 +17,10 @@
 # Sample Usage:
 #
 define pxe::images (
-    $os,
-    $ver,
-    $arch,
-    $baseurl = ''
+  $os,
+  $ver,
+  $arch,
+  $baseurl = ''
 ) {
 
   $tftp_root = $::pxe::tftp_root
@@ -92,5 +92,6 @@ define pxe::images (
 
     default: { err ("images for $os not configured") }
   }
+
 }
 

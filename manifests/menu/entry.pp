@@ -14,7 +14,7 @@ define pxe::menu::entry (
     $template   = "pxe/menuentry.erb",
     $order      ='10',
     $kernel     = "menu.c32",
-    $append,
+    $append     = '',
     $file,
     $menuetitle = ''
 ) {
