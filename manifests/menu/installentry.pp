@@ -1,6 +1,8 @@
 # Define: pxe::menu::installentry
 #
-# This will create an entry, but also accepts things like arch and version
+# This will create an entry, but also accepts things like arch and version,
+# which are not useed, but are useful for use with resource_permute, when you
+# want to permute on values, but not use them.
 #
 # Parameters:
 #
@@ -31,18 +33,17 @@ define pxe::menu::installentry (
   }
 
   $tftp_root = $::pxe::tftp_root
-  $fullpath  = "$tftp_root/pxelinux.cfg"
+  $fullpath  = "${tftp_root}/pxelinux.cfg"
 
-  $menu_file     = inline_template($file)
+  $file_string   = inline_template($file)
   $append_string = inline_template($append)
   $kernel_string = inline_template($kernel)
   $label_string  = inline_template($label)
 
   concat::fragment { "install-menu-${label_string}":
     order   => $order,
-    target  => "$fullpath/$menu_file",
+    target  => "${fullpath}/${file_string}",
     content => template("pxe/menuinstallentry.erb"),
   }
 
 }
-
