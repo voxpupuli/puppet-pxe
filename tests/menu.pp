@@ -37,3 +37,20 @@ pxe::menu {
 #}
 
 
+# How I want it to be
+
+#$debian = {
+#  "arch" => ["amd64","i386"],
+#  "ver"  => ["lenny","squeeze","wheezy"],
+#  "os"   => "debian"
+#}
+#
+#$debian_menu = {
+#  file    => "os_<%= os %>",
+#  kernel  => "images/debian/<%= arch %>/<%= ver %>/linux",
+#  append  => "vga=791 initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/debian_base.cfg text",
+#}
+#
+#resource_permute('pxe::menu::zentry', $debian, $debian_menu)
+#
+

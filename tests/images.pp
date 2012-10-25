@@ -25,7 +25,7 @@ $redhat = {
 }
 
 $redhat_common = {
-  "baseurl" => "http://mirror.dc1.example.net<%= ver %>server-<%= arch %>/disc1/images/pxeboot"
+  "baseurl" => "http://yo.puppetlabs.lan/rhel<%= ver %>server-<%= arch %>/disc1/images/pxeboot"
 }
 
 $scientific = {
