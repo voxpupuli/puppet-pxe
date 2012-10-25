@@ -1,11 +1,17 @@
 # * file: which file to write to
 # * template: to use for the menu
 
+# Here we want to setup a new menu file, but we also want to be able to get to
+# this menu from another menu.  The $root refers to to the file that is directly
+# above this one in the menu which allows us to setup the file to which this
+# resource appies, but also add a pxe::menu::entry to get here.
+
 define pxe::menu (
     $file,
     $back     = "Main Menu",
     $append   = "pxelinux.cfg/default",
-    $template = "pxe/menu.erb"
+    $template = "pxe/menu.erb",
+    $root     = "default",
 ) {
 
   include concat::setup
@@ -20,6 +26,15 @@ define pxe::menu (
   }
 
   concat { "$fullpath/$file": }
+
+  # If we are adding the root entry, then there is no need to reference this
+  # from elsewhere.
+  if $file != $root {
+    pxe::menu::entry { $name:
+      file   => $root,
+      append => "pxelinux.cfg/${file}",
+    }
+  }
 
 }
 

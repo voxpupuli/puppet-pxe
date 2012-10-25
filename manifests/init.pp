@@ -14,18 +14,40 @@ class pxe ($tftp_root='/srv/tftp'){
 
   file {
     "${tftp_root}/pxelinux.0":
-      ensure    => directory,
       owner     => root,
       group     => 0,
       mode      => 755,
-      source    => "$syslinux_dir/core/pxelinux.0",
+      source    => "${syslinux_dir}/core/pxelinux.0",
       require   => Exec["syslinux_install"];
     "${tftp_root}/menu.c32":
-      ensure    => directory,
       owner     => root,
       group     => 0,
       mode      => 755,
-      source    => "$syslinux_dir/com32/menu/menu.c32",
+      source    => "${syslinux_dir}/com32/menu/menu.c32",
+      require   => Exec["syslinux_install"];
+    "${tftp_root}/vesamenu.c32":
+      owner     => root,
+      group     => 0,
+      mode      => 755,
+      source    => "${syslinux_dir}/com32/menu/vesamenu.c32",
+      require   => Exec["syslinux_install"];
+    "${tftp_root}/chain.c32":
+      owner     => root,
+      group     => 0,
+      mode      => 755,
+      source    => "${syslinux_dir}/com32/modules/chain.c32",
+      require   => Exec["syslinux_install"];
+    "${tftp_root}/reboot.c32":
+      owner     => root,
+      group     => 0,
+      mode      => 755,
+      source    => "${syslinux_dir}/com32/modules/reboot.c32",
+      require   => Exec["syslinux_install"];
+    "${tftp_root}/memdisk":
+      owner     => root,
+      group     => 0,
+      mode      => 755,
+      source    => "${syslinux_dir}/memdisk/memdisk",
       require   => Exec["syslinux_install"];
     "${tftp_root}/pxelinux.cfg":
       ensure    => directory,
@@ -35,4 +57,3 @@ class pxe ($tftp_root='/srv/tftp'){
   }
 
 }
-

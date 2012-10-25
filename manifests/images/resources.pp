@@ -1,6 +1,10 @@
 # Define: pxe::images::resources
 #
-# This define creates a series of resources that are used in other defines.  The reason for this class is to allow `include pxe::images::resources` in classes/defines where you will need a given resource more than once.  This merely facilitates the createtion of virtual resources for realization in other parts of the code.
+# This define creates a series of resources that are used in other defines.  The
+# reason for this class is to allow `include pxe::images::resources` in
+# classes/defines where you will need a given resource more than once.  This
+# merely facilitates the createtion of virtual resources for realization in
+# other parts of the code.
 #
 # Parameters:
 #
@@ -14,7 +18,7 @@ define pxe::images::resources (
     $os,
     $ver,
     $arch
-  ) {
+) {
 
   $tftp_root = $::pxe::tftp_root
   $os_cap    = inline_template("<%= os.capitalize %>")
@@ -27,42 +31,23 @@ define pxe::images::resources (
 
   # Menu
   if !defined(Pxe::Menu["Main Menu"]) {
-    @pxe::menu {
-      "Main Menu":
+    @pxe::menu { "Main Menu":
         file     => "default",
         template => "pxe/menu_default.erb";
     }
   }
 
-  if !defined(Pxe::Menu::Entry["Installations"]) {
-    @pxe::menu::entry {
-      "Installations":
-        file    => "default",
-        append  => "pxelinux.cfg/menu_install",
+  if ! defined(Pxe::Menu['System Installers']) {
+    pxe::menu { 'System Installers':
+      file  => "menu_install",
     }
   }
 
-  if ! defined(Pxe::Menu['System Installs']) {
-    pxe::menu {
-      'System Installs':
-        file  => "menu_install",
-    }
-  }
-
-  if ! defined(Pxe::Menu::Entry["$os_cap"]) {
-    @pxe::menu::entry {
-      "$os_cap":
-        file    => "menu_install",
-        append  => "pxelinux.cfg/os_${os}",
-    }
-  }
-
-  if ! defined(Pxe::Menu["$os_cap"]) { # we will arrive here more than once, avoid dupes
-    @pxe::menu {
-      "$os_cap":
-        file  => "os_${os}",
+  if ! defined(Pxe::Menu["$os_cap"]) {
+    @pxe::menu { "$os_cap":
+      file => "os_${os}",
+      root => "menu_install",
     }
   }
 
 }
-
