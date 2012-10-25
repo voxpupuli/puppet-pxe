@@ -9,20 +9,24 @@ Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
   # Second arg: the hash of permutable resourece
   # Third arg: Common resources that will get added to each resource addition
 
-  rec_type    = args[0]
-  hash        = args[1]
-  common_hash = args[2]
+  resource_type = args[0]
+  hash          = args[1]
+  common_hash   = args[2]
 
   # Class borrowed from:
   # https://github.com/lucasdicioccio/laborantin/blob/master/lib/laborantin/core/parameter_hash.rb
   class ParameterHash < Hash
     # Recursively yields all the possible configurations of parameters (a new hash).
-    # No order is supported on the recursion, and it is not planned to.
+
+    # The first argument is all of the keeys that need to be processed.
+    # The config is the hash item that we are building, thus, empty on start and we will fill it in.
     def each_config(remaining=self.keys, cfg={}, &blk)
+      # Process one of the remaining keys.
       key = remaining.pop
       if key
         self[key].each do |val|
           cfg[key] = val
+          # Call ourselves, creating a duplicate of remaining keys
           each_config(remaining.dup, cfg, &blk)
         end
       else
@@ -46,7 +50,7 @@ Puppet::Parser::Functions::newfunction(:resource_permute) do |args|
     end
     blag = {}
     blag["#{title}"] = cfg
-    function_create_resources([rec_type,blag])
+    function_create_resources([resource_type,blag])
   end
 
 end

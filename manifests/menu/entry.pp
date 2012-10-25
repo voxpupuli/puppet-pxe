@@ -28,12 +28,13 @@ define pxe::menu::entry (
   $tftp_root = $::pxe::tftp_root
   $fullpath  = "${tftp_root}/pxelinux.cfg"
 
-  concat::fragment { "$target-menu-entry-$title":
+  $file_string   = inline_template($file)
+  $label_string  = inline_template($label)
+
+  concat::fragment { "${file_string}-menu-entry-${title}":
     order   => $order,
-    target  => "$fullpath/$file",
+    target  => "${fullpath}/${file_string}",
     content => template("pxe/menuentry.erb"),
   }
 
-
 }
-

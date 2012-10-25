@@ -1,11 +1,20 @@
 DEFAULT menu.c32
 PROMPT 0
-TIMEOUT 300
-ONTIMEOUT local
+TIMEOUT 30
+ONTIMEOUT razor-boot
 
 MENU TITLE Main Menu
+
+label razor-boot
+  menu label Automatic Razor Node Boot
+  kernel ipxe.lkrn
+  initrd razor.ipxe
 
 LABEL local
   MENU LABEL Boot first hard drive
   LOCALBOOT 0
+
+LABEL reboot
+  MENU LABEL Reboot
+  KERNEL reboot.c32
 

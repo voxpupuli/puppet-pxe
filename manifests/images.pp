@@ -77,6 +77,18 @@ define pxe::images (
           };
       }
     }
+    mfsbsd: {
+      pxe::images::mfsbsd {
+        "$os $ver $arch":
+          arch    => "$arch",
+          ver     => "$ver",
+          os      => "$os",
+          baseurl => $baseurl ? {
+            ''      => undef,
+            default => $baseurl
+          };
+      }
+    }
 
     default: { err ("images for $os not configured") }
   }
