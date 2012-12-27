@@ -11,7 +11,7 @@ class pxe::syslinux {
   exec { "syslinux_install":
     path    => ["/bin", "/usr/bin", "/usr/local/bin"],
     cwd     => "/usr/local/src",
-    command => "wget -q -O - ${syslinux_archive} | tar -xz -C /usr/local/src",
+    command => "wget -q -O - ${syslinux_archive} | tar -xzf - -C /usr/local/src",
     creates => "/usr/local/src/syslinux-4.04",
   }
 
