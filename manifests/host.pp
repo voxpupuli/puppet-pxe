@@ -28,8 +28,8 @@ define pxe::host (
     "text",
   ]
 
-  pxe::menu::host { "$hwaddr": 
-    kernel => "$kernel",
+  pxe::menu::host { "$hwaddr":
+    kernel => $kernel,
     append => inline_template("<% appendargs.each do |arg| %><%= arg %> <% end %>"),
   }
 
