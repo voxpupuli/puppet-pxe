@@ -1,28 +1,37 @@
-Puppet PXE
-==========
-Deploy PXE boot images and menu for network installations.
+# Puppet Powered PXE Provisioning
+
+Super awesome Puppet powered PXE menu and image management for network based
+installations.  Seriously.  Its awesome.
 
 Features
 --------
-  * Automatic image downloading
-  * Menu management
-  * Supported OSs 
+  * Automatic image fetching
+  * Menu management for easy selection at boot time
+  * Host specific menu management
+  * Supported OSs
     * Debian
     * Ubuntu
     * CentOS
-    * Ret Hat (with `baseurl`)
+    * RetHat (with `baseurl`)
     * Fedora
     * Scientific
 
-Usage
------
+## Sample Usage
+
 ### Images
+
+Here is a sample of how one might stage the network installation images and
+build menus for selection at boot time.
+
+First, we start by dragging in the pre-reqs for the whole process.
 
     include pxe
 
+Next, lets build a hash for each of the image sets we intend to be booting.
+
     $ubuntu = {
       "arch" => ["amd64","i386"],
-      "ver"  => ["hardy","karmic","lucid","maverick","natty","oneiric"],
+      "ver"  => ["hardy","karmic","lucid","maverick","natty","oneiric","precise"],
       "os"   => "ubuntu"
     }
 
@@ -32,13 +41,18 @@ Usage
       "os"   => "redhat"
     }
 
+We can also append common options that will be supported across each of the
+menu entries created by the `resource_permute` function.
+
     $redhat_common = {
       "baseurl" => "http://mirror.dyrden.net/rhel<%= ver %>server-<%= arch %>/disc1/images/pxeboot"
     }
 
+Now we permute and combine the hashes to generate the individual resources that
+fetch the images and place them in the correct directory structure.
+
     resource_permute('pxe::images', $ubuntu)
     resource_permute('pxe::images', $redhat, $redhat_common)
-
 
 ### Menus
 
