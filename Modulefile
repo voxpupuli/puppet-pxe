@@ -7,5 +7,6 @@ summary 'PXE!'
 description 'A Puppet module to deploy and manage a Pre eXecution Environment
 for network based provisioning'
 project_page 'https://github.com/xaque208/puppet-pxe'
-dependency 'ripienaar/concat'
 dependency 'xaque208/permute'
+dependency 'ripienaar/concat'
+dependency 'puppetlabs/tftp'
