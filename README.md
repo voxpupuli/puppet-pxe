@@ -16,7 +16,21 @@ Features
     * Fedora
     * Scientific
 
+Dependencies
+---
+
+You will need a running TFTP configured.  The module now depends on the
+`puppetlabs/tftp` module.
+
 ## Sample Usage
+
+# Basic setup
+
+    class { "tftp": }
+    class { "pxe": }
+
+This will setup a tftp server and directory and install pxelinux into it with a
+base configuration.
 
 ### Images
 
