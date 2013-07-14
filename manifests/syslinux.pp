@@ -12,7 +12,7 @@ class pxe::syslinux {
     path    => ["/bin", "/usr/bin", "/usr/local/bin"],
     cwd     => "/usr/local/src",
     command => "wget -q -O - ${syslinux_archive} | tar -xzf - -C /usr/local/src",
-    creates => "/usr/local/src/syslinux-4.04",
+    creates => "/usr/local/src/${syslinux_archive}",
   }
 
   File {
