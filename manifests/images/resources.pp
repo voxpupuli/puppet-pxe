@@ -21,7 +21,7 @@ define pxe::images::resources (
 ) {
 
   $tftp_root = $::pxe::tftp_root
-  $os_cap    = inline_template("<%= os.capitalize %>")
+  $os_cap    = inline_template("<%= @os.capitalize %>")
 
   # directory structure
   if ! defined(File["$tftp_root/images"]) { @file { "$tftp_root/images": ensure => directory; } }
@@ -49,5 +49,4 @@ define pxe::images::resources (
       root => "menu_install",
     }
   }
-
 }

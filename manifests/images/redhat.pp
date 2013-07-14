@@ -18,6 +18,4 @@ define pxe::images::redhat($arch,$ver,$os,$baseurl) {
       creates => "$tftp_root/images/redhat/$ver/$arch/initrd.img",
       command => "wget $srclocation/initrd.img";
   }
-
 }
-

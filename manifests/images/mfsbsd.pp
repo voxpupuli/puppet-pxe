@@ -22,5 +22,4 @@ define pxe::images::mfsbsd(
       command => "wget ${srclocation}/${path}",
       creates => "${tftp_root}/images/${os}/${path}";
   }
-
 }

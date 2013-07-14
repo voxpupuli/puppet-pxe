@@ -30,6 +30,4 @@ define pxe::images::debian(
       command => "wget $srclocation/$path/initrd.gz",
       creates => "$tftp_root/images/$os/$ver/$arch/initrd.gz";
   }
-
 }
-
