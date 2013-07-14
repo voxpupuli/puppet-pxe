@@ -61,9 +61,9 @@ d-i netcfg/wireless_wep string
 # If you select ftp, the mirror/country string does not need to be set.
 #d-i mirror/protocol string ftp
 d-i mirror/country string manual
-d-i mirror/http/hostname string <%= mirror %>
-d-i mirror/http/directory string <%= mirror_directory %>
-<% if has_variable?("proxy") %>d-i mirror/http/proxy string <%= proxy %><%end%>
+d-i mirror/http/hostname string <%= @mirror %>
+d-i mirror/http/directory string <%= @mirror_directory %>
+<% if @proxy %>d-i mirror/http/proxy string <%= @proxy %><%end%>
 
 # Alternatively: by default, the installer uses CC.archive.ubuntu.com where
 # CC is the ISO-3166-2 code for the selected country. You can preseed this
@@ -71,9 +71,9 @@ d-i mirror/http/directory string <%= mirror_directory %>
 #d-i mirror/http/mirror select CC.archive.ubuntu.com
 
 # Suite to install.
-d-i mirror/suite string <%= ver %>
+d-i mirror/suite string <%= @ver %>
 # Suite to use for loading installer components (optional).
-d-i mirror/udeb/suite string <%= ver %>
+d-i mirror/udeb/suite string <%= @ver %>
 # Components to use for loading installer components (optional).
 d-i mirror/udeb/components multiselect main, restricted
 
