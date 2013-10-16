@@ -8,7 +8,7 @@ class pxe::tools::memtest (
   $tftp_root = $::pxe::tftp_root
 
   exec { "retrieve memtest image":
-    path    => ["/usr/bin", "/usr/local/bin"],
+    path    => ["/usr/bin", "/usr/local/bin", "/bin"],
     command => "wget -q -O - ${url} | gunzip > ${tftp_root}/tools/memtest86+",
     creates => "${tftp_root}/tools/memtest86+",
     require => File["${tftp_root}/tools"],
