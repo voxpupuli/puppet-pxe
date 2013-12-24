@@ -31,9 +31,6 @@ class pxe::syslinux {
     "${tftp_root}/vesamenu.c32":
       source    => "${syslinux_dir}/com32/menu/vesamenu.c32",
       require   => Exec["syslinux_install"];
-    "${tftp_root}/chain.c32":
-      source    => "${syslinux_dir}/com32/modules/chain.c32",
-      require   => Exec["syslinux_install"];
     "${tftp_root}/reboot.c32":
       source    => "${syslinux_dir}/com32/modules/reboot.c32",
       require   => Exec["syslinux_install"];
