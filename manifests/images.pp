@@ -66,15 +66,14 @@ define pxe::images (
       }
     }
     redhat: {
-      pxe::images::redhat {
-        "$os $ver $arch":
-          arch    => "$arch",
-          ver     => "$ver",
-          os      => "$os",
-          baseurl => $baseurl ? {
-            ''      => undef,
-            default => $baseurl
-          };
+      if $baseurl != '' {
+        pxe::images::redhat {
+          "$os $ver $arch":
+            arch    => "$arch",
+            ver     => "$ver",
+            os      => "$os",
+            baseurl => $baseurl,
+        }
       }
     }
     mfsbsd: {
