@@ -2,9 +2,9 @@ default menu.c32
 prompt 0
 timeout 0
 
-MENU TITLE <%= target %> Menu
+MENU TITLE <%= @target %> Menu
 
-LABEL <%= back_name %>
+LABEL <%= @back_name %>
   KERNEL menu.c32
-  APPEND <%= back %>
+  APPEND <%= @back %>
 
