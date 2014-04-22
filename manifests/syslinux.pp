@@ -16,9 +16,15 @@ class pxe::syslinux {
   }
 
   File {
-    owner => root,
-    group => 0,
-    mode  => 755,
+    owner   => root,
+    group   => 0,
+    mode    => 755,
+    require => File[$tftp_root],
+  }
+
+  file { $tftp_root:
+    ensure  => directory,
+    require => undef,
   }
 
   file {
