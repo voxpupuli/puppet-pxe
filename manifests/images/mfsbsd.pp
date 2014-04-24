@@ -16,7 +16,7 @@ define pxe::images::mfsbsd(
   $path    = "${os}-${ver}-${arch}.img"
   $tftp_root = $::pxe::tftp_root
 
-  exec { "wget $os live image $arch $ver":
+  exec { "wget ${os} live image ${arch} ${ver}":
       path    => ["/usr/bin", "/usr/local/bin"],
       cwd     => "${tftp_root}/images/${os}/",
       command => "wget ${srclocation}/${path}",
