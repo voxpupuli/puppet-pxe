@@ -24,29 +24,28 @@ define pxe::images (
 ) {
 
   $tftp_root = $::pxe::tftp_root
-  $os_cap    = inline_template("<%= @os.capitalize %>")
+  $os_cap    = inline_template('<%= @os.capitalize %>')
 
   # Export the resources needed by all classes
-  pxe::images::resources { "$os $ver $arch":
+  pxe::images::resources { "${os} ${ver} ${arch}":
     os   => $os,
     ver  => $ver,
     arch => $arch;
   }
 
   # Realize some directories
-  File <| title == "$tftp_root/images" |>
-  File <| title == "$tftp_root/images/$os" |>
-  File <| title == "$tftp_root/images/$os/$ver" |>
-  File <| title == "$tftp_root/images/$os/$ver/$arch" |>
+  File <| title == "${tftp_root}/images" |>
+  File <| title == "${tftp_root}/images/${os}" |>
+  File <| title == "${tftp_root}/images/${os}/${ver}" |>
+  File <| title == "${tftp_root}/images/${os}/${ver}/${arch}" |>
 
   # Download the images
   case $os {
     debian,ubuntu: {
-      pxe::images::debian {
-        "$os $ver $arch":
-          arch    => "$arch",
-          ver     => "$ver",
-          os      => "$os",
+      pxe::images::debian { "${os} ${ver} ${arch}":
+          arch    => $arch,
+          ver     => $ver,
+          os      => $os,
           baseurl => $baseurl ? {
             ''      => undef,
             default => $baseurl
@@ -54,11 +53,10 @@ define pxe::images (
       }
     }
     centos,fedora,scientific: {
-      pxe::images::centos {
-        "$os $ver $arch":
-          arch    => "$arch",
-          ver     => "$ver",
-          os      => "$os",
+      pxe::images::centos { "${os} ${ver} ${arch}":
+          arch    => $arch,
+          ver     => $ver,
+          os      => $os,
           baseurl => $baseurl ? {
             ''      => undef,
             default => $baseurl
@@ -67,21 +65,19 @@ define pxe::images (
     }
     redhat: {
       if $baseurl != '' {
-        pxe::images::redhat {
-          "$os $ver $arch":
-            arch    => "$arch",
-            ver     => "$ver",
-            os      => "$os",
+        pxe::images::redhat { "${os} ${ver} ${arch}":
+            arch    => $arch,
+            ver     => $ver,
+            os      => $os,
             baseurl => $baseurl,
         }
       }
     }
     mfsbsd: {
-      pxe::images::mfsbsd {
-        "$os $ver $arch":
-          arch    => "$arch",
-          ver     => "$ver",
-          os      => "$os",
+      pxe::images::mfsbsd { "${os} ${ver} ${arch}":
+          arch    => $arch,
+          ver     => $ver,
+          os      => $os,
           baseurl => $baseurl ? {
             ''      => undef,
             default => $baseurl
@@ -89,8 +85,7 @@ define pxe::images (
       }
     }
 
-    default: { err ("images for $os not configured") }
+    default: { err ("images for ${os} not configured") }
   }
 
 }
-
