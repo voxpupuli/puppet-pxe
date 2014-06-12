@@ -36,5 +36,9 @@ define pxe::menu (
     }
   }
 
+  if $root == 'default' {
+    if !defined(Concat["${fullpath}/${root}"]) {
+      concat { "${fullpath}/${root}": }
+    }
+  }
 }
-
