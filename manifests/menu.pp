@@ -8,10 +8,10 @@
 
 define pxe::menu (
   $file,
-  $back     = "Main Menu",
-  $append   = "pxelinux.cfg/default",
-  $template = "pxe/menu.erb",
-  $root     = "default",
+  $back     = 'Main Menu',
+  $append   = 'pxelinux.cfg/default',
+  $template = 'pxe/menu.erb',
+  $root     = 'default',
 ) {
 
   include concat::setup

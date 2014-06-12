@@ -1,7 +1,12 @@
-class pxe ($tftp_root='/srv/tftp'){
+# Class: pxe
+#
+# Setup a PXE root directory
+#
+class pxe (
+  $tftp_root='/srv/tftp'
+){
 
   include pxe::params
-  include pxe::tools
   include pxe::syslinux
-
+  include pxe::tools
 }
