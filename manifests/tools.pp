@@ -8,9 +8,10 @@ class pxe::tools {
   }
 
   # Create the tool menu
-  pxe::menu { "Tools": file => "menu_tools", }
+  pxe::menu { 'Tools':
+    file => 'menu_tools',
+  }
 
   # Bring in some tools
   include pxe::tools::memtest
-
 }
