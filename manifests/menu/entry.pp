@@ -11,12 +11,12 @@
 # Sample Usage:
 #
 define pxe::menu::entry (
-    $template   = "pxe/menuentry.erb",
-    $order      ='10',
-    $kernel     = "menu.c32",
-    $append     = '',
     $file,
-    $menuetitle = ''
+    $order     = '10',
+    $template  = 'pxe/menuentry.erb',
+    $kernel    = 'menu.c32',
+    $append    = '',
+    $menutitle = '',
 ) {
 
   if $menutitle == '' {
@@ -34,7 +34,6 @@ define pxe::menu::entry (
   concat::fragment { "${file_string}-menu-entry-${title}":
     order   => $order,
     target  => "${fullpath}/${file_string}",
-    content => template("pxe/menuentry.erb"),
+    content => template('pxe/menuentry.erb'),
   }
-
 }

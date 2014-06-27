@@ -25,7 +25,9 @@ define pxe::menu (
     content => template($template),
   }
 
-  concat { "${fullpath}/${file}": }
+  if !defined(Concat["${fullpath}/${file}"]) {
+    concat { "${fullpath}/${file}": }
+  }
 
   # If we are adding the root entry, then there is no need to reference this
   # from elsewhere.
