@@ -1,5 +1,5 @@
 name    'zleslie-pxe'
-version '0.0.8'
+version '0.0.9'
 source 'git://github.com/xaque208/puppet-pxe.git'
 author 'zleslie'
 license 'Apache License Version 2.0'
