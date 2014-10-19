@@ -3,12 +3,11 @@
 # Retrieve the requested Debian image
 #
 define pxe::images::debian(
-    $arch,
-    $ver,
-    $os      = 'debian',
-    $baseurl = ''
-    ) {
-# This assumes debian as an os, but it works equally for os="ubuntu"
+  $arch,
+  $ver,
+  $os      = 'debian', # ubuntu also works
+  $baseurl = ''
+) {
 
   if $baseurl == '' {
     case $os {
