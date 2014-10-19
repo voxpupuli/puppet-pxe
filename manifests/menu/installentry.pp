@@ -13,14 +13,14 @@
 # Sample Usage:
 #
 define pxe::menu::installentry (
-    $order     ='10',
     $kernel,
     $append,
     $file,
     $arch,
     $os,
     $ver,
-    $template  = "pxe/menuinstallentry.erb",
+    $order     = '10',
+    $template  = 'pxe/menuinstallentry.erb',
     $menutitle = ''
 ) {
 
@@ -43,7 +43,6 @@ define pxe::menu::installentry (
   concat::fragment { "install-menu-${label_string}":
     order   => $order,
     target  => "${fullpath}/${file_string}",
-    content => template("pxe/menuinstallentry.erb"),
+    content => template('pxe/menuinstallentry.erb'),
   }
-
 }

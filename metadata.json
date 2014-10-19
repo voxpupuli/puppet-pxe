@@ -1,0 +1,44 @@
+{
+  "name": "zleslie-pxe",
+  "version": "0.0.9",
+  "author": "zleslie",
+  "summary": "A Puppet module to deploy and manage a Pre eXecution Environment",
+  "license": "Apache License Version 2.0",
+  "source": "git://github.com/xaque208/puppet-pxe.git",
+  "project_page": "https://github.com/xaque208/puppet-pxe",
+  "issues_url": "https://github.com/xaque208/puppet-pxe/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "FreeBSD",
+      "operatingsystemrelease": [
+        "10",
+        "9.3",
+        "8.4"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": ">= 3.2.0 < 3.4.0"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 1.1.0"
+    },
+    {
+      "name": "zleslie/permute",
+      "version_requirement": ">= 0.0.3"
+    },
+    {
+      "name": "puppetlabs/tftp",
+      "version_requirement": ">= 0.2.0"
+    }
+  ]
+}

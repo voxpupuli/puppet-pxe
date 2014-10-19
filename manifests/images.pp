@@ -1,26 +1,16 @@
 # Define: pxe::images
 #
-# This is the control class for grabbing pxe network boot images.  Simlar distros are lumped together because the logic in the sub-define is the same.
+# This is the control class for grabbing pxe network boot images.  Simlar
+# distros are lumped together because the logic in the sub-define is the same.
 #
-# Parameters:
-#   os: the name of the os to use in urls when grabbing images and building the tftp directory structure
-#   ver:
-#   arch:
-#   baseurl:
-#
-# Actions:
-#   * Create directory structure for tftp images
-#   * Download images from public mirrors or private locations ( set by baseurl )
-#
-# Requires:
-#
-# Sample Usage:
+# * Create directory structure for tftp images
+# * Download images from public mirrors or private locations ( set by baseurl )
 #
 define pxe::images (
   $os,
   $ver,
   $arch,
-  $baseurl = ''
+  $baseurl = undef
 ) {
 
   $tftp_root = $::pxe::tftp_root
@@ -43,49 +33,39 @@ define pxe::images (
   case $os {
     debian,ubuntu: {
       pxe::images::debian { "${os} ${ver} ${arch}":
-          arch    => $arch,
-          ver     => $ver,
-          os      => $os,
-          baseurl => $baseurl ? {
-            ''      => undef,
-            default => $baseurl
-          };
+        arch    => $arch,
+        ver     => $ver,
+        os      => $os,
+        baseurl => $baseurl,
       }
     }
     centos,fedora,scientific: {
       pxe::images::centos { "${os} ${ver} ${arch}":
-          arch    => $arch,
-          ver     => $ver,
-          os      => $os,
-          baseurl => $baseurl ? {
-            ''      => undef,
-            default => $baseurl
-          };
+        arch    => $arch,
+        ver     => $ver,
+        os      => $os,
+        baseurl => $baseurl,
       }
     }
     redhat: {
       if $baseurl != '' {
         pxe::images::redhat { "${os} ${ver} ${arch}":
-            arch    => $arch,
-            ver     => $ver,
-            os      => $os,
-            baseurl => $baseurl,
+          arch    => $arch,
+          ver     => $ver,
+          os      => $os,
+          baseurl => $baseurl,
         }
       }
     }
     mfsbsd: {
       pxe::images::mfsbsd { "${os} ${ver} ${arch}":
-          arch    => $arch,
-          ver     => $ver,
-          os      => $os,
-          baseurl => $baseurl ? {
-            ''      => undef,
-            default => $baseurl
-          };
+        arch    => $arch,
+        ver     => $ver,
+        os      => $os,
+        baseurl => $baseurl,
       }
     }
 
     default: { err ("images for ${os} not configured") }
   }
-
 }

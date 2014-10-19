@@ -6,8 +6,8 @@ pxe::menu { 'Main Menu':
 }
 
 pxe::menu::entry { 'Installations':
-  file    => 'default',
-  append  => 'pxelinux.cfg/menu_install',
+  file   => 'default',
+  append => 'pxelinux.cfg/menu_install',
 }
 
 pxe::menu { "Operating System (${arch})":

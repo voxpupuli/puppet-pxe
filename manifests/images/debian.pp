@@ -1,15 +1,19 @@
+# Class: pxe::images::debian
+#
+# Retrieve the requested Debian image
+#
 define pxe::images::debian(
     $arch,
     $ver,
-    $os = "debian",
+    $os      = 'debian',
     $baseurl = ''
     ) {
 # This assumes debian as an os, but it works equally for os="ubuntu"
 
   if $baseurl == '' {
     case $os {
-      "debian": { $srclocation = "http://ftp.debian.org/${os}/dists" }
-      "ubuntu": { $srclocation = "http://archive.ubuntu.com/${os}/dists" }
+      'debian': { $srclocation = "http://ftp.debian.org/${os}/dists" }
+      'ubuntu': { $srclocation = "http://archive.ubuntu.com/${os}/dists" }
       default:  { $srclocation = "http://mirrors.kernel.org/${os}/dists" }
     }
   }
@@ -20,16 +24,14 @@ define pxe::images::debian(
 
   exec {
     "wget ${os} pxe linux ${arch} ${ver}":
-      path    => ["/usr/bin", "/usr/local/bin"],
+      path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       command => "wget ${srclocation}/${path}/linux",
       creates => "${tftp_root}/images/${os}/${ver}/${arch}/linux";
     "wget ${os} pxe initrd.img ${arch} ${ver}":
-      path    => ["/usr/bin", "/usr/local/bin"],
+      path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       command => "wget ${srclocation}/${path}/initrd.gz",
       creates => "${tftp_root}/images/${os}/${ver}/${arch}/initrd.gz";
   }
-
 }
-

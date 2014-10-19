@@ -16,7 +16,7 @@ permute { 'Debian Installers':
   common   => {
     file   => 'os_<%= @os %>',
     kernel => 'images/<%= @os %>/<%= @ver %>/<%= @arch %>/linux',
-    append => 'initrd=images/<%= @os %>/<%= @ver %>/<%= @arch %>/initrd.gz text',
+    append => 'initrd=images/<%=@os%>/<%=@ver%>/<%=@arch%>/initrd.gz text',
   },
 }
 
@@ -30,7 +30,7 @@ permute { 'CentOS Installers':
   common   => {
     file   => 'os_<%= @os %>',
     kernel => 'images/<%= @os %>/<%= @ver %>/<%= @arch %>/vmlinuz',
-    append => 'initrd=images/<%= @os %>/<%= @ver %>/<%= @arch %>/initrd.img text',
+    append => 'initrd=images/<%=@os%>/<%=@ver%>/<%=@arch%>/initrd.img text',
   },
 }
 
@@ -89,15 +89,15 @@ pxe::menu { 'Deployments': file => 'menu_deploy', }
 permute { 'Debian Ops':
   resource => 'pxe::menu::installentry',
   unique   => {
-    arch   => ['amd64'],
-    ver    => ['squeeze','wheezy'],
-    os     => ['debian'],
+    arch => ['amd64'],
+    ver  => ['squeeze','wheezy'],
+    os   => ['debian'],
   },
   common   => {
     file      => 'menu_deploy',
     kernel    => 'images/<%= @os %>/<%= @ver %>/<%= @arch %>/linux',
     append    => 'initrd=images/<%= @os %>/<%= @ver %>/<%= @arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= @os %> domain=<%= @domain %> url=http://boot.<%= @domain %>/d-i/debian_ops.cfg text suite=<%= @ver %>',
-    menutitle => 'Operations auto-deployment <%= @os %> <%= @ver %> <%= @arch %>',
+    menutitle => 'Operations auto-deployment <%=@os%> <%=@ver%> <%=@arch%>',
   },
 }
 

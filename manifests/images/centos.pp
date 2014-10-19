@@ -1,9 +1,13 @@
+# Class: pxe::images::centos
+#
+# Retrieve the requested CentOS image
+#
 define pxe::images::centos(
-    $arch,
-    $ver,
-    $os = "centos",
-    $baseurl = ''
-  ) {
+  $arch,
+  $ver,
+  $os      = 'centos',
+  $baseurl = ''
+) {
 
   $tftp_root = $::pxe::tftp_root
 
@@ -15,16 +19,14 @@ define pxe::images::centos(
 
   exec {
     "wget ${os} pxe linux ${arch} ${ver}":
-      path    => ["/usr/bin", "/usr/local/bin"],
+      path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       creates => "${tftp_root}/images/${os}/${ver}/${arch}/vmlinuz",
       command => "wget ${srclocation}/vmlinuz";
     "wget ${os} pxe initrd.img ${arch} ${ver}":
-      path    => ["/usr/bin", "/usr/local/bin"],
+      path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       creates => "${tftp_root}/images/${os}/${ver}/${arch}/initrd.img",
       command => "wget ${srclocation}/initrd.img";
   }
-
 }
-
