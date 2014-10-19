@@ -9,8 +9,8 @@ define pxe::host (
   $hwaddr,
   $arch,
   $ver,
-  $get_hostname   = "unassigned-hostname",
-  $boot_interface = "eth0",
+  $get_hostname   = 'unassigned-hostname',
+  $boot_interface = 'eth0',
   $seed_url       = 'http://tork.znet/bootstrap/maverick.cfg'
 ) {
 
@@ -19,18 +19,18 @@ define pxe::host (
 
   $appendargs = [
     "initrd=${initrd}",
-    "auto",
-    "locale=en_US",
-    "console-setup/layoutcode=us",
+    'auto',
+    'locale=en_US',
+    'console-setup/layoutcode=us',
     "url=${seed_url}",
     "netcfg/get_hostname=${get_hostname}",
     "netcfg/choose_interface=${boot_interface}",
-    "text",
+    'text',
   ]
 
   pxe::menu::host { $hwaddr:
     kernel => $kernel,
-    append => inline_template("<% @appendargs.each do |arg| %><%= @arg %> <% end %>"),
+    append => inline_template('<% @appendargs.each do |arg| %><%= @arg %> <% end %>'),
   }
 
 }

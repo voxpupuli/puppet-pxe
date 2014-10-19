@@ -1,15 +1,17 @@
-# This define is a wrapper to do two things:
-# * download the image files
-# * setup a generic an installation entry for each image
+# Define: pxe::installer
+#
+# Downlaods the requested image and sets up a generic installation entry for
+# each image.
+#
 define pxe::installer (
-    $os,
-    $ver,
-    $arch,
-    $baseurl = '',
-    $menu    = true,
-    $file,
-    $kernel,
-    $append
+  $os,
+  $ver,
+  $arch,
+  $file,
+  $kernel,
+  $append,
+  $baseurl = '',
+  $menu    = true,
 ){
 
   if $menu == true {
@@ -32,5 +34,4 @@ define pxe::installer (
     kernel => $kernel_string,
     append => $append_string,
   }
-
 }
