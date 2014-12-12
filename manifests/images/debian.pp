@@ -15,6 +15,8 @@ define pxe::images::debian(
       'ubuntu': { $srclocation = "http://archive.ubuntu.com/${os}/dists" }
       default:  { $srclocation = "http://mirrors.kernel.org/${os}/dists" }
     }
+  } else {
+    $srclocation = "${baseurl}/${os}/dists"
   }
 
   # http://mirrors.kernel.org/debian/dists/lucid/main/installer-amd64/current/images/netboot/debian-installer/amd64/
