@@ -5,10 +5,8 @@
 #
 class pxe (
   $tftp_root        = $pxe::params::tftp_root,
-  $syslinux_archive = undef
+  $syslinux_archive = $pxe::params::syslinux_archive,
 ) inherits pxe::params {
-  class { 'pxe::syslinux':
-    syslinux_archive => $syslinux_archive
-  }
+  include pxe::syslinux
   include pxe::tools
 }
