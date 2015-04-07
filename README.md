@@ -17,6 +17,7 @@ Features
     * RetHat (with `baseurl`)
     * Fedora
     * Scientific
+    * CoreOS
 
 Dependencies
 ---
