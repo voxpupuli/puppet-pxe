@@ -47,6 +47,14 @@ define pxe::images (
         baseurl => $baseurl,
       }
     }
+    coreos: {
+      pxe::images::coreos { "${os} ${ver} ${arch}":
+        arch    => $arch,
+        ver     => $ver,
+        os      => $os,
+        baseurl => $baseurl,
+      }
+    }
     redhat: {
       if $baseurl != '' {
         pxe::images::redhat { "${os} ${ver} ${arch}":
