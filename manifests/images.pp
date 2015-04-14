@@ -10,6 +10,7 @@ define pxe::images (
   $os,
   $ver,
   $arch,
+  $netboot = 'netboot',
   $baseurl = undef
 ) {
 
@@ -36,6 +37,7 @@ define pxe::images (
         arch    => $arch,
         ver     => $ver,
         os      => $os,
+        netboot => $netboot,
         baseurl => $baseurl,
       }
     }

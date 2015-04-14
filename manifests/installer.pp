@@ -11,6 +11,7 @@ define pxe::installer (
   $kernel,
   $append,
   $baseurl = '',
+  $netboot = 'netboot',
   $menu    = true,
 ){
 
@@ -23,6 +24,7 @@ define pxe::installer (
     os      => $os,
     ver     => $ver,
     arch    => $arch,
+    netboot => $netboot,
     baseurl => $baseurl,
   }
 
