@@ -18,7 +18,7 @@ class pxe::syslinux {
   File {
     owner   => root,
     group   => 0,
-    mode    => 755,
+    mode    => '0755',
     require => File[$tftp_root],
   }
 
