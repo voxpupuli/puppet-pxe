@@ -11,8 +11,8 @@ class pxe::syslinux {
   exec { 'syslinux_install':
     path    => ['/bin', '/usr/bin', '/usr/local/bin'],
     cwd     => '/usr/local/src',
-    command => "wget -q -O - ${syslinux_archive} | tar -xzf - -C /usr/local/src",
-    creates => '/usr/local/src/syslinux-4.04',
+    command => "wget -q -O - ${syslinux_archive} | tar -xzf - -C `dirname ${syslinux_dir}`",
+    creates => $syslinux_dir,
   }
 
   File {
@@ -27,21 +27,34 @@ class pxe::syslinux {
     require => undef,
   }
 
+  file { "${tftp_root}/syslinux":
+    ensure => directory,
+  }
+
   file {
     "${tftp_root}/pxelinux.0":
-      source    => "${syslinux_dir}/core/pxelinux.0",
+      source    => "${syslinux_dir}/bios/core/pxelinux.0",
       require   => Exec['syslinux_install'];
-    "${tftp_root}/menu.c32":
-      source    => "${syslinux_dir}/com32/menu/menu.c32",
+    "${tftp_root}/syslinux/menu.c32":
+      source    => "${syslinux_dir}/bios/com32/menu/menu.c32",
       require   => Exec['syslinux_install'];
-    "${tftp_root}/vesamenu.c32":
-      source    => "${syslinux_dir}/com32/menu/vesamenu.c32",
+    "${tftp_root}/syslinux/vesamenu.c32":
+      source    => "${syslinux_dir}/bios/com32/menu/vesamenu.c32",
       require   => Exec['syslinux_install'];
-    "${tftp_root}/reboot.c32":
-      source    => "${syslinux_dir}/com32/modules/reboot.c32",
+    "${tftp_root}/syslinux/reboot.c32":
+      source    => "${syslinux_dir}/bios/com32/modules/reboot.c32",
       require   => Exec['syslinux_install'];
-    "${tftp_root}/memdisk":
-      source    => "${syslinux_dir}/memdisk/memdisk",
+    "${tftp_root}/syslinux/ldlinux.c32":
+      source    => "${syslinux_dir}/bios/com32/elflink/ldlinux/ldlinux.c32",
+      require   => Exec['syslinux_install'];
+    "${tftp_root}/syslinux/libcom32.c32":
+      source    => "${syslinux_dir}/bios/com32/lib/libcom32.c32",
+      require   => Exec['syslinux_install'];
+    "${tftp_root}/syslinux/libutil.c32":
+      source    => "${syslinux_dir}/bios/com32/libutil/libutil.c32",
+      require   => Exec['syslinux_install'];
+    "${tftp_root}/syslinux/memdisk":
+      source    => "${syslinux_dir}/bios/memdisk/memdisk",
       require   => Exec['syslinux_install'];
     "${tftp_root}/pxelinux.cfg":
       ensure    => directory;
