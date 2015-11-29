@@ -15,7 +15,7 @@ define pxe::images::mfsbsd(
     }
   }
 
-  # http://mirrors.kernel.org/debian/dists/lucid/main/installer-amd64/current/images/netboot/debian-installer/amd64/
+  # http://mfsbsd.vx.sk/files/images/10/amd64/mfsbsd-10.2-RELEASE-amd64.img
   $path    = "${os}-${ver}-${arch}.img"
   $tftp_root = $::pxe::tftp_root
 
