@@ -1,6 +1,6 @@
 # Puppet Powered PXE Provisioning
 
-[![Build Status](https://travis-ci.org/xaque208/puppet-pxe.png)](https://travis-ci.org/xaque208/puppet-pxe)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/zleslie/pxe.svg)]() [![Build Status](https://travis-ci.org/xaque208/puppet-pxe.svg?branch=master)](https://travis-ci.org/xaque208/puppet-pxe)
 
 Super awesome Puppet powered PXE menu and image management for network based
 installations.  Seriously.  Its awesome.
