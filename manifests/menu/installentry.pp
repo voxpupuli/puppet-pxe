@@ -24,8 +24,6 @@ define pxe::menu::installentry (
     $menutitle = ''
 ) {
 
-  include concat::setup
-
   if $menutitle == '' {
     $label = $title
   } else {

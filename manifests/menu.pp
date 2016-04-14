@@ -14,8 +14,6 @@ define pxe::menu (
   $root     = 'default',
 ) {
 
-  include concat::setup
-
   $tftp_root = $::pxe::tftp_root
   $fullpath  = "${tftp_root}/pxelinux.cfg"
 
