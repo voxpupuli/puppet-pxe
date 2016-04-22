@@ -34,6 +34,6 @@ define pxe::menu::entry (
   concat::fragment { "${file_string}-menu-entry-${title}":
     order   => $order,
     target  => "${fullpath}/${file_string}",
-    content => template('pxe/menuentry.erb'),
+    content => template($template),
   }
 }
