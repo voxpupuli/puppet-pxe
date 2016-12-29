@@ -8,7 +8,7 @@ define pxe::images::coreos(
   $os      = 'coreos',
   $baseurl = ''
 ) {
-  
+
   if $arch != 'amd64' { err("Only arch = 'amd64' is supported for CoreOS, ${arch} is invalid") }
   if $os != 'coreos' { err("Only os = 'coreos' is supported for CoreOS, ${os} is invalid") }
 
