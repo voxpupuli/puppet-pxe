@@ -51,11 +51,13 @@ define pxe::images::mfsbsd(
   }
 
   $tftp_root = $::pxe::tftp_root
+  $imgdir    = "${tftp_root}/images/${os}/${ver}/${arch}"
+  $imgfile   = "${os}-${ver}-${arch}.img"
 
   exec { "wget ${os} live image ${arch} ${ver}":
     path    => ['/usr/bin', '/usr/local/bin'],
-    cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
+    cwd     => $imgdir,
     command => "wget ${srclocation}/${path}",
-    creates => "${tftp_root}/images/${os}/${path}";
+    creates => "${imgdir}/${imgfile}",
   }
 }
