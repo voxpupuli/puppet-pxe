@@ -35,29 +35,29 @@ define pxe::images::mfsbsd(
   $maj = $ver_a[0]
   $min = $ver_a[1]
 
-  $srclocation = $baseurl ? {
+  $remotebase = $baseurl ? {
     /(http|ftp):\/\/.+/ => $baseurl,
     default             => 'http://mfsbsd.vx.sk/files/images',
   }
 
+  $tftp_root = $::pxe::tftp_root
+  $localdir    = "${tftp_root}/images/${os}/${ver}/${arch}"
+
   # NOTICE: with 11.0-RELEASE, mm@ has dropped i386 and changed the path
   # http://mfsbsd.vx.sk/files/images/10/amd64/mfsbsd-10.2-RELEASE-amd64.img
   # http://mfsbsd.vx.sk/files/images/11/mfsbsd-11.0-RELEASE-amd64.img
-
   # TODO: with puppet > 4, parse numbers from strings, use numeric comparison
-  $path = $maj ? {
-    /11/    => "${maj}/${os}-${ver}-${arch}.img",
-    default => "${maj}/${arch}/${os}-${ver}-${arch}.img",
+  $remotedir = $maj ? {
+    /11/    => $maj,
+    default => "${maj}/${arch}/",
   }
 
-  $tftp_root = $::pxe::tftp_root
-  $imgdir    = "${tftp_root}/images/${os}/${ver}/${arch}"
   $imgfile   = "${os}-${ver}-${arch}.img"
 
   exec { "wget ${os} live image ${arch} ${ver}":
+    cwd     => $localdir,
+    command => "wget ${remotebase}/${remotedir}/${imgfile}",
+    creates => "${localdir}/${imgfile}",
     path    => ['/usr/bin', '/usr/local/bin'],
-    cwd     => $imgdir,
-    command => "wget ${srclocation}/${path}",
-    creates => "${imgdir}/${imgfile}",
   }
 }
