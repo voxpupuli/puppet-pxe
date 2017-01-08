@@ -67,7 +67,7 @@ define pxe::images (
         }
       }
     }
-    /^mfsbsd(-se|-mini)$/: {
+    /^mfsbsd(-se|-mini)?$/: {
       pxe::images::mfsbsd { "${os} ${ver} ${arch}":
         arch    => $arch,
         ver     => $ver,
