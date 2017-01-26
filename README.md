@@ -48,40 +48,35 @@ First, we start by dragging in the pre-reqs for the whole process.
 include pxe
 ```
 
-Next, lets build a hash for each of the image sets we intend to be booting.
+Next, lets loop over some data and create a few `pxe::installer` resources
+using the new Puppet language methods.
 
 ```Puppet
-permute { 'Debian Installers':
-  resource => 'pxe::installer',
-  unique   => {
-    arch => ['amd64','i386'],
-    ver  => ['squeeze','wheezy'],
-    os   => 'debian'
-  },
-  common   => {
-    file   => 'os_<%= @os %>',
-    kernel => 'images/<%= @os %>/<%= @ver %>/<%= @arch %>/linux',
-    append => 'initrd=images/<%= @os %>/<%= @ver %>/<%= @arch %>/initrd.gz text',
-  },
+$debian_architectures = ['amd64', 'i386']
+$debian_versions = ['squeeze', 'wheezy', 'jessie']
+
+$debian_versions.each |$ver| {
+  $os = 'debian'
+
+  $debian_architectures.each |$arch| {
+
+    pxe::installer { "${os}_${ver}_${arch}":
+      arch   => $arch,
+      ver    => $ver,
+      os     => $os,
+      file   => 'os_${os}',
+      kernel => 'images/${os}/${ver}/${arch}/linux',
+      append => 'initrd=images/${os}/${ver}/${arch}/initrd.gz text',
+    }
+  }
 }
 ```
 
-We can also append common options that will be supported across each of the
-menu entries created by the `resource_permute` function.
-
-```Puppet
-$redhat_common = {
-  "baseurl" => "http://mirror.dyrden.net/rhel<%= ver %>server-<%= arch %>/disc1/images/pxeboot"
-}
-```
-
-Now we permute and combine the hashes to generate the individual resources that
-fetch the images and place them in the correct directory structure.
-
-```Puppet
-resource_permute('pxe::images', $ubuntu)
-resource_permute('pxe::images', $redhat, $redhat_common)
-```
+This structure could be extended considerably, but it paints a picture for how
+to build a bunch of resources using the puppet iteration.  This module used to
+recommend use of the `resource_permute()` function, but that was long before
+the new Puppet4 language constructs replaced the need for this function.  As
+such, its recommended that you use the `pxe::installer` resources directly.
 
 ### Menus
 
