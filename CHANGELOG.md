@@ -1,3 +1,14 @@
+## 2017-01-30 0.3.0
+### Summary
+This release contains updates to testing, and supported versions.
+
+#### Testing
+ - Drop older versions of the Puppet 3.x from testing
+ - Improve basic unit tests
+
+#### Features
+ - Fixes for mfsbsd image deployment
+
 ## 2016-12-29 0.2.0
 ### Summary
 This release contains updates for testing updates and mfsbsd image
