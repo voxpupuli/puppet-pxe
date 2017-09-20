@@ -17,5 +17,5 @@ class pxe::tools {
   }
 
   # Bring in some tools
-  include pxe::tools::memtest
+  include ::pxe::tools::memtest
 }

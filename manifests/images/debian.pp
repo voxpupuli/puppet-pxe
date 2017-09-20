@@ -7,10 +7,10 @@ define pxe::images::debian(
   $ver,
   $netboot = 'netboot', # ubuntu provides other netboots, ex "utopic-netboot"
   $os      = 'debian', # ubuntu also works
-  $baseurl = ''
+  $baseurl = undef,
 ) {
 
-  if $baseurl == '' {
+  if ! $baseurl {
     case $os {
       'debian': { $srclocation = "http://ftp.debian.org/${os}/dists" }
       'ubuntu': { $srclocation = "http://archive.ubuntu.com/${os}/dists" }

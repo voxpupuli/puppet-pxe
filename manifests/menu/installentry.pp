@@ -21,10 +21,10 @@ define pxe::menu::installentry (
     $ver,
     $order     = '10',
     $template  = 'pxe/menuinstallentry.erb',
-    $menutitle = ''
+    $menutitle = undef,
 ) {
 
-  if $menutitle == '' {
+  if ! $menutitle {
     $label = $title
   } else {
     $label = $menutitle

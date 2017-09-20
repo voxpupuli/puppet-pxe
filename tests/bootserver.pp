@@ -1,7 +1,7 @@
 # ----------
 # Server Setup
 # ----------
-class { 'pxe': }
+include ::pxe
 
 # ----------
 # Basic images for manuall install
@@ -11,7 +11,7 @@ permute { 'Debian Installers':
   unique   => {
     arch => ['amd64','i386'],
     ver  => ['squeeze','wheezy','jessie'],
-    os   => 'debian'
+    os   => 'debian',
   },
   common   => {
     file   => 'os_<%= @os %>',
@@ -25,7 +25,7 @@ permute { 'CentOS Installers':
   unique   => {
     arch => ['x86_64','i386'],
     ver  => [5,6],
-    os   => 'centos'
+    os   => 'centos',
   },
   common   => {
     file   => 'os_<%= @os %>',

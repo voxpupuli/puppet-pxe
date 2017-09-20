@@ -6,12 +6,12 @@ define pxe::images::centos(
   $arch,
   $ver,
   $os      = 'centos',
-  $baseurl = ''
+  $baseurl = undef,
 ) {
 
   $tftp_root = $::pxe::tftp_root
 
-  if $baseurl == '' {
+  if ! $baseurl {
     $srclocation = "http://mirrors.kernel.org/${os}/${ver}/os/${arch}/images/pxeboot"
   } else {
     $srclocation = inline_template($baseurl)

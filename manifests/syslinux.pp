@@ -2,7 +2,7 @@
 
 class pxe::syslinux {
 
-  include pxe::params
+  include ::pxe::params
 
   $syslinux_dir     = $pxe::params::syslinux_dir
   $syslinux_archive = $pxe::params::syslinux_archive
