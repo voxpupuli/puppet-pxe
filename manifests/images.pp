@@ -11,7 +11,7 @@ define pxe::images (
   $ver,
   $arch,
   $netboot = 'netboot',
-  $baseurl = undef
+  $baseurl = undef,
 ) {
 
   include ::pxe
@@ -34,7 +34,7 @@ define pxe::images (
 
   # Download the images
   case $os {
-    debian,ubuntu: {
+    'debian','ubuntu': {
       pxe::images::debian { "${os} ${ver} ${arch}":
         arch    => $arch,
         ver     => $ver,
@@ -43,7 +43,7 @@ define pxe::images (
         baseurl => $baseurl,
       }
     }
-    centos,fedora,scientific: {
+    'centos','fedora','scientific': {
       pxe::images::centos { "${os} ${ver} ${arch}":
         arch    => $arch,
         ver     => $ver,
@@ -51,7 +51,7 @@ define pxe::images (
         baseurl => $baseurl,
       }
     }
-    coreos: {
+    'coreos': {
       pxe::images::coreos { "${os} ${ver} ${arch}":
         arch    => $arch,
         ver     => $ver,
@@ -59,8 +59,8 @@ define pxe::images (
         baseurl => $baseurl,
       }
     }
-    redhat: {
-      if $baseurl != '' {
+    'redhat': {
+      if $baseurl {
         pxe::images::redhat { "${os} ${ver} ${arch}":
           arch    => $arch,
           ver     => $ver,

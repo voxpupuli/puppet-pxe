@@ -11,7 +11,7 @@ define pxe::host (
   $ver,
   $get_hostname   = 'unassigned-hostname',
   $boot_interface = 'eth0',
-  $seed_url       = 'http://tork.znet/bootstrap/maverick.cfg'
+  $seed_url       = 'http://tork.znet/bootstrap/maverick.cfg',
 ) {
 
   $kernel = "images/ubuntu/${ver}/${arch}/linux"

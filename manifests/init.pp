@@ -4,8 +4,8 @@
 # menuing system with syslinux and some pxe tools installed.
 #
 class pxe (
-  $tftp_root='/srv/tftp'
+  $tftp_root='/srv/tftp',
 ){
-  include pxe::syslinux
-  include pxe::tools
+  include ::pxe::syslinux
+  include ::pxe::tools
 }

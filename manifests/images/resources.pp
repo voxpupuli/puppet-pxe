@@ -9,7 +9,7 @@
 define pxe::images::resources (
   $os,
   $ver,
-  $arch
+  $arch,
 ) {
 
   $tftp_root = $::pxe::tftp_root

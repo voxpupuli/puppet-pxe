@@ -1,6 +1,9 @@
 # Define: pxe::menu::host
 #
-define pxe::menu::host ($kernel,$append) {
+define pxe::menu::host (
+  $kernel,
+  $append,
+) {
 
   $tftp_root = $pxe::tftp_root
   $label     = $title

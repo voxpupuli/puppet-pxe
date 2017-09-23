@@ -15,11 +15,11 @@ define pxe::menu::entry (
     $order     = '10',
     $template  = 'pxe/menuentry.erb',
     $kernel    = 'menu.c32',
-    $append    = '',
-    $menutitle = '',
+    $append    = undef,
+    $menutitle = undef,
 ) {
 
-  if $menutitle == '' {
+  if ! $menutitle {
     $label = $title
   } else {
     $label = $menutitle
