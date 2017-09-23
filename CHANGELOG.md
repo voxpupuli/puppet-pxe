@@ -1,3 +1,8 @@
+## 2017-09-23 0.4.0
+### Summary
+This release contains cleanups of unused files and README updates to point
+users in the right direction for new puppet syntax.
+
 ## 2017-01-30 0.3.0
 ### Summary
 This release contains updates to testing, and supported versions.
