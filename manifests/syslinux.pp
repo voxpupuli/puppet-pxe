@@ -1,18 +1,26 @@
+#
 # This class will install the syslinux images into the tftp root directory.
+#
+class pxe::syslinux(
+  String[1] $syslinux_version,
+  String[1] $tftp_root,
+  String[1] $system_syslinux_dir   = $pxe::params::system_syslinux_dir,
+) inherits pxe::params {
 
-class pxe::syslinux {
-
-  include ::pxe::params
-
-  $syslinux_dir     = $pxe::params::syslinux_dir
-  $syslinux_archive = $pxe::params::syslinux_archive
-  $tftp_root        = $pxe::tftp_root
-
-  exec { 'syslinux_install':
-    path    => ['/bin', '/usr/bin', '/usr/local/bin'],
-    cwd     => '/usr/local/src',
-    command => "wget -q -O - ${syslinux_archive} | tar -xzf - -C `dirname ${syslinux_dir}`",
-    creates => $syslinux_dir,
+  if $syslinux_version == 'system' {
+    class { 'pxe::syslinux::system':
+      syslinux_dir => $system_syslinux_dir,
+      tftp_root    => $tftp_root,
+    }
+  } elsif $syslinux_version =~ /^[1-9]/ {
+    $syslinux_major_version = $1
+    class { 'pxe::syslinux::direct':
+      syslinux_dir     => "/usr/local/src/syslinux-${syslinux_version}",
+      syslinux_archive => "https://www.kernel.org/pub/linux/utils/boot/syslinux/${syslinux_major_version}.xx/syslinux-${syslinux_version}.tar.gz",
+      tftp_root        => $tftp_root,
+    }
+  } else {
+    fail('Invalid Syslinux Version')
   }
 
   File {
@@ -29,46 +37,6 @@ class pxe::syslinux {
 
   file { "${tftp_root}/syslinux":
     ensure => directory,
-  }
-
-  file { "${tftp_root}/pxelinux.0":
-    source  => "${syslinux_dir}/bios/core/pxelinux.0",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/menu.c32":
-    source  => "${syslinux_dir}/bios/com32/menu/menu.c32",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/vesamenu.c32":
-    source  => "${syslinux_dir}/bios/com32/menu/vesamenu.c32",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/reboot.c32":
-    source  => "${syslinux_dir}/bios/com32/modules/reboot.c32",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/ldlinux.c32":
-    source  => "${syslinux_dir}/bios/com32/elflink/ldlinux/ldlinux.c32",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/libcom32.c32":
-    source  => "${syslinux_dir}/bios/com32/lib/libcom32.c32",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/libutil.c32":
-    source  => "${syslinux_dir}/bios/com32/libutil/libutil.c32",
-    require => Exec['syslinux_install'],
-  }
-
-  file { "${tftp_root}/syslinux/memdisk":
-    source  => "${syslinux_dir}/bios/memdisk/memdisk",
-    require => Exec['syslinux_install'],
   }
 
   file { "${tftp_root}/pxelinux.cfg":
