@@ -78,6 +78,19 @@ recommend use of the `resource_permute()` function, but that was long before
 the new Puppet4 language constructs replaced the need for this function.  As
 such, its recommended that you use the `pxe::installer` resources directly.
 
+## Syslinux
+
+By default this module will install the latest version of syslinux, downloaded
+from kernel.org (You can see the latest version in the manifests/params.pp)
+file.  To install the version that ships with your OS, or to specify a version,
+pass the syslinux variable to pxe.  
+
+For Example:
+
+class { 'pxe':
+  syslinux_version => 'system',
+}
+
 ### Menus
 
 ```Puppet
@@ -111,4 +124,3 @@ pxe::menu::entry { "server1.dyrden.net":
   append  => "vga=791 initrd=images/debian/i386/squeeze/squeeze.gz",
 }
 ```
-
