@@ -1,3 +1,7 @@
+## 2018-05-26 1.0.0
+Modulesync updates and add a syslinux version parameter to support older
+versions of syslinux.
+
 ## 2017-09-23 0.4.0
 ### Summary
 This release contains cleanups of unused files and README updates to point
