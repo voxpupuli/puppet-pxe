@@ -89,4 +89,14 @@ begin
   end
 rescue LoadError
 end
+
+begin
+  Blacksmith::RakeTask.new do |t|
+    t.tag_message_pattern = "Version %s"
+    t.tag_pattern = "%s"
+  end
+rescue
+end
+
+
 # vim: syntax=ruby
