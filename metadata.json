@@ -1,6 +1,6 @@
 {
   "name": "zleslie-pxe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "zleslie",
   "summary": "A Puppet module to deploy and manage a Pre eXecution Environment",
   "license": "Apache-2.0",
@@ -18,11 +18,23 @@
     }
   ],
   "requirements": [
-    { "name": "puppet", "version_requirement": ">= 3.8.0 < 5.0.0" }
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.8.0 < 5.0.0"
+    }
   ],
   "dependencies": [
-    {"name":"puppetlabs/concat","version_requirement":">=1.2.1 < 2.3.0"},
-    {"name":"puppetlabs/stdlib","version_requirement":">=4.4.0 < 4.16.0"},
-    { "name": "puppetlabs/tftp", "version_requirement": ">= 0.2.0 < 1.0.0" }
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">=1.2.1 < 2.3.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=4.4.0 < 4.16.0"
+    },
+    {
+      "name": "puppetlabs/tftp",
+      "version_requirement": ">= 0.2.0 < 1.0.0"
+    }
   ]
 }
