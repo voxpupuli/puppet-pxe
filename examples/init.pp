@@ -1,1 +1,1 @@
-include ::pxe
+include pxe

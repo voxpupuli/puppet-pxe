@@ -14,7 +14,7 @@ define pxe::images (
   $baseurl = undef,
 ) {
 
-  include ::pxe
+  include pxe
 
   $tftp_root = $::pxe::tftp_root
   $os_cap    = inline_template('<%= @os.capitalize %>')

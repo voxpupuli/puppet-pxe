@@ -1,4 +1,4 @@
-include ::pxe
+include pxe
 
 pxe::menu { 'Main Menu':
   file     => 'default',
