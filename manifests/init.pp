@@ -14,6 +14,6 @@ class pxe (
     syslinux_version => $syslinux_version,
   }
   if $tools{
-    include ::pxe::tools
+    include pxe::tools
   }
 }

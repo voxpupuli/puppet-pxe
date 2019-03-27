@@ -83,7 +83,7 @@ such, its recommended that you use the `pxe::installer` resources directly.
 By default this module will install the latest version of syslinux, downloaded
 from kernel.org (You can see the latest version in the manifests/params.pp)
 file.  To install the version that ships with your OS, or to specify a version,
-pass the syslinux variable to pxe.  
+pass the syslinux variable to pxe.
 
 For Example:
 

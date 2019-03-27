@@ -1,7 +1,7 @@
 # ----------
 # Server Setup
 # ----------
-include ::pxe
+include pxe
 
 # ----------
 # Basic images for manuall install
