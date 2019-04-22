@@ -14,7 +14,7 @@ group :test do
   gem 'puppetlabs_spec_helper', '>= 2.11.0',                        :require => false
   gem 'rspec-puppet-facts', '>= 1.8.0',                             :require => false
   gem 'rspec-puppet-utils',                                         :require => false
-  gem 'pdk',                                                        :require => false
+  gem 'pdk', '>= 1.10.0',                                           :require => false
   gem 'puppet-module',                                              :require => false
   gem 'puppet-lint-leading_zero-check',                             :require => false
   gem 'puppet-lint-trailing_comma-check',                           :require => false
