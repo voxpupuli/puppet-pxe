@@ -9,7 +9,7 @@ define pxe::images::redhat(
   $baseurl,
 ) {
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
 
   if ! $baseurl { err('$baseurl is empty and it need not be') }
 

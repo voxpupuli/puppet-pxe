@@ -40,7 +40,7 @@ define pxe::images::mfsbsd(
     default             => 'http://mfsbsd.vx.sk/files/images',
   }
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
   $localdir    = "${tftp_root}/images/${os}/${ver}/${arch}"
 
   # NOTICE: with 11.0-RELEASE, mm@ has dropped i386 and changed the path

@@ -1,5 +1,5 @@
 ---
-dist: xenial
+dist: bionic
 language: ruby
 cache: bundler
 before_install:
@@ -29,19 +29,3 @@ branches:
   - /^v\d/
 notifications:
   email: false
-  irc:
-    on_success: false
-    on_failure: false
-    channels:
-      - "chat.freenode.org#voxpupuli-notifications"
-deploy:
-  provider: puppetforge
-  user: puppet
-  password:
-    secure: ""
-  on:
-    tags: true
-    # all_branches is required to use tags
-    all_branches: true
-    # Only publish the build marked with "DEPLOY_TO_FORGE"
-    condition: "$DEPLOY_TO_FORGE = yes"

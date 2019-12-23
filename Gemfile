@@ -11,10 +11,10 @@ def location_for(place, fake_version = nil)
 end
 
 group :test do
-  gem 'puppetlabs_spec_helper', '>= 2.11.0',                        :require => false
-  gem 'rspec-puppet-facts', '>= 1.8.0',                             :require => false
+  gem 'puppetlabs_spec_helper', '>= 2.14.0',                        :require => false
+  gem 'rspec-puppet-facts', '>= 1.9.5',                             :require => false
   gem 'rspec-puppet-utils',                                         :require => false
-  gem 'pdk', '>= 1.10.0',                                           :require => false
+  gem 'pdk',                                                        :require => false
   gem 'puppet-module',                                              :require => false
   gem 'puppet-lint-leading_zero-check',                             :require => false
   gem 'puppet-lint-trailing_comma-check',                           :require => false
@@ -23,6 +23,9 @@ group :test do
   gem 'puppet-lint-unquoted_string-check',                          :require => false
   gem 'puppet-lint-variable_contains_upcase',                       :require => false
   gem 'puppet-lint-absolute_classname-check',                       :require => false
+  gem 'puppet-lint-topscope-variable-check',                        :require => false
+  gem 'puppet-lint-legacy_facts-check',                             :require => false
+  gem 'puppet-lint-anchor-check',                                   :require => false
   gem 'metadata-json-lint',                                         :require => false
   gem 'redcarpet',                                                  :require => false
   gem 'rubocop', '~> 0.49.1',                                       :require => false
@@ -64,10 +67,10 @@ group :system_tests do
 end
 
 group :release do
-  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/github-changelog-generator/github-changelog-generator'
+  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/voxpupuli/github-changelog-generator', :branch => 'voxpupuli_essential_fixes'
   gem 'puppet-blacksmith',           :require => false
-  gem 'voxpupuli-release',           :require => false, :git => 'https://github.com/voxpupuli/voxpupuli-release-gem'
-  gem 'puppet-strings', '>= 1.0',    :require => false
+  gem 'voxpupuli-release',           :require => false
+  gem 'puppet-strings', '>= 2.2',    :require => false
 end
 
 
