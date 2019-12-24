@@ -30,7 +30,7 @@ define pxe::menu::installentry (
     $label = $menutitle
   }
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
   $fullpath  = "${tftp_root}/pxelinux.cfg"
 
   $file_string   = inline_template($file)

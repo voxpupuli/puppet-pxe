@@ -18,7 +18,7 @@ define pxe::images::coreos(
     $srclocation = "${baseurl}/${arch}-usr/${ver}"
   }
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
 
   exec {
     "wget ${os} pxe linux ${arch} ${ver}":

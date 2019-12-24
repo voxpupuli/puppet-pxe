@@ -12,7 +12,7 @@ define pxe::images::resources (
   $arch,
 ) {
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
   $os_cap    = inline_template('<%= @os.capitalize %>')
 
   # directory structure

@@ -9,7 +9,7 @@ define pxe::images::centos(
   $baseurl = undef,
 ) {
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
 
   if ! $baseurl {
     $srclocation = "http://mirrors.kernel.org/${os}/${ver}/os/${arch}/images/pxeboot"

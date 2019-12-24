@@ -425,9 +425,6 @@ Style/NumericLiterals:
 Style/OneLineConditional:
   Enabled: True
 
-Style/OpMethod:
-  Enabled: True
-
 Style/ParenthesesAroundCondition:
   Enabled: True
 

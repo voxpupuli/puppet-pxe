@@ -16,7 +16,7 @@ define pxe::images (
 
   include pxe
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
   $os_cap    = inline_template('<%= @os.capitalize %>')
 
   # Export the resources needed by all classes

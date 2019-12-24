@@ -14,7 +14,7 @@ define pxe::menu (
   $root     = 'default',
 ) {
 
-  $tftp_root = $::pxe::tftp_root
+  $tftp_root = $pxe::tftp_root
   $fullpath  = "${tftp_root}/pxelinux.cfg"
 
   concat::fragment { "menu_${name}-header":
