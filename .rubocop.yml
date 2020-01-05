@@ -1,6 +1,6 @@
 require: rubocop-rspec
 AllCops:
-  TargetRubyVersion: 1.9
+  TargetRubyVersion: 2.1
   Include:
     - ./**/*.rb
   Exclude:
@@ -13,8 +13,6 @@ AllCops:
     - Rakefile
     - Guardfile
     - Vagrantfile
-
-
 Lint/ConditionPosition:
   Enabled: True
 
@@ -425,6 +423,9 @@ Style/NumericLiterals:
 Style/OneLineConditional:
   Enabled: True
 
+Style/OpMethod:
+  Enabled: True
+
 Style/ParenthesesAroundCondition:
   Enabled: True
 
@@ -521,10 +522,6 @@ RSpec/NamedSubject:
 # disabled for now since they cause a lot of issues
 # these issues aren't easy to fix
 RSpec/RepeatedDescription:
-  Enabled: False
-
-# disabled for simpler testing on multiple platforms in case statement
-RSpec/RepeatedExample:
   Enabled: False
 
 RSpec/NestedGroups:
