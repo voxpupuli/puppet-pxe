@@ -1,12 +1,12 @@
 {
-  "name": "zleslie-pxe",
+  "name": "puppet-pxe",
   "version": "1.0.1",
-  "author": "zleslie",
+  "author": "Vox Pupuli",
   "summary": "A Puppet module to deploy and manage a Pre eXecution Environment",
   "license": "Apache-2.0",
-  "source": "git://github.com/xaque208/puppet-pxe.git",
-  "project_page": "https://github.com/xaque208/puppet-pxe",
-  "issues_url": "https://github.com/xaque208/puppet-pxe/issues",
+  "source": "git://github.com/voxpupuli/puppet-pxe.git",
+  "project_page": "https://github.com/voxpupuli/puppet-pxe",
+  "issues_url": "https://github.com/voxpupuli/puppet-pxe/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "FreeBSD",

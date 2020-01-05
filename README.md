@@ -1,6 +1,11 @@
 # Puppet Powered PXE Provisioning
 
-[![Puppet Forge](https://img.shields.io/puppetforge/v/zleslie/pxe.svg)]() [![Build Status](https://travis-ci.org/xaque208/puppet-pxe.svg?branch=master)](https://travis-ci.org/xaque208/puppet-pxe)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-pxe.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-pxe)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-pxe/badge.svg?branch=master)](https://coveralls.io/github/voxpupuli/puppet-pxe)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/pxe.svg)](https://forge.puppetlabs.com/puppet/pxe)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/pxe.svg)](https://forge.puppetlabs.com/puppet/pxe)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/pxe.svg)](https://forge.puppetlabs.com/puppet/pxe)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/pxe.svg)](https://forge.puppetlabs.com/puppet/pxe)
 
 Super awesome Puppet powered PXE menu and image management for network based
 installations.  Seriously.  Its awesome.
