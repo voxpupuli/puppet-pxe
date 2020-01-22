@@ -1,10 +1,5 @@
 fixtures:
   repositories:
-    stdlib:
-      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-      ref: '4.4.0'
-    concat:
-      repo: "https://github.com/puppetlabs/puppetlabs-concat.git"
-      ref: '1.2.1'
-  pxe:
-    unbound: "#{source_dir}"
+    concat: "https://github.com/puppetlabs/puppetlabs-concat.git"
+    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    tftp: "https://github.com/puppetlabs/puppetlabs-tftp.git"

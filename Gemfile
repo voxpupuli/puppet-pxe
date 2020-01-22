@@ -1,4 +1,4 @@
-source ENV['GEM_SOURCE'] || 'https://rubygems.org'
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 def location_for(place, fake_version = nil)
   if place =~ /^(git[:@][^#]*)#(.*)/
@@ -14,15 +14,13 @@ group :test do
   gem 'puppetlabs_spec_helper', '>= 2.14.0',                        :require => false
   gem 'rspec-puppet-facts', '>= 1.9.5',                             :require => false
   gem 'rspec-puppet-utils',                                         :require => false
-  gem 'pdk',                                                        :require => false
-  gem 'puppet-module',                                              :require => false
   gem 'puppet-lint-leading_zero-check',                             :require => false
   gem 'puppet-lint-trailing_comma-check',                           :require => false
   gem 'puppet-lint-version_comparison-check',                       :require => false
   gem 'puppet-lint-classes_and_types_beginning_with_digits-check',  :require => false
   gem 'puppet-lint-unquoted_string-check',                          :require => false
   gem 'puppet-lint-variable_contains_upcase',                       :require => false
-  gem 'puppet-lint-absolute_classname-check',                       :require => false
+  gem 'puppet-lint-absolute_classname-check', '>= 2.0.0',           :require => false
   gem 'puppet-lint-topscope-variable-check',                        :require => false
   gem 'puppet-lint-legacy_facts-check',                             :require => false
   gem 'puppet-lint-anchor-check',                                   :require => false
