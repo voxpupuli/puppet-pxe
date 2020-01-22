@@ -1,6 +1,6 @@
 {
   "name": "puppet-pxe",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "Vox Pupuli",
   "summary": "A Puppet module to deploy and manage a Pre eXecution Environment",
   "license": "Apache-2.0",
