@@ -30,10 +30,10 @@ class pxe::syslinux(
     require => File[$tftp_root],
   }
 
-  file { $tftp_root:
+  ensure_resource('file', $tftp_root, {
     ensure  => directory,
     require => undef,
-  }
+  })
 
   file { "${tftp_root}/syslinux":
     ensure => directory,
