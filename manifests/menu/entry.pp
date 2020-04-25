@@ -36,4 +36,7 @@ define pxe::menu::entry (
     target  => "${fullpath}/${file_string}",
     content => template($template),
   }
+  if !defined(Concat["${fullpath}/${file_string}"]) {
+    concat { "${fullpath}/${file_string}": }
+  }
 }
