@@ -9,6 +9,11 @@ class pxe (
   $tools            = true,
 ) inherits pxe::params {
 
+  # Ensure wget is installed before any execs of wget
+  Package <| |> -> Exec <| |>
+  package { 'wget':
+    ensure => present,
+  }
   class { 'pxe::syslinux':
     tftp_root        => $tftp_root,
     syslinux_version => $syslinux_version,
