@@ -20,11 +20,13 @@ define pxe::images::redhat(
       path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/redhat/${ver}/${arch}",
       creates => "${tftp_root}/images/redhat/${ver}/${arch}/vmlinuz",
-      command => "wget ${srclocation}/vmlinuz";
+      command => "wget ${srclocation}/vmlinuz",
+      require => Class['pxe'];
     "wget redhat pxe initrd.img ${arch} ${ver}":
       path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/redhat/${ver}/${arch}",
       creates => "${tftp_root}/images/redhat/${ver}/${arch}/initrd.img",
-      command => "wget ${srclocation}/initrd.img";
+      command => "wget ${srclocation}/initrd.img",
+      require => Class['pxe'];
   }
 }

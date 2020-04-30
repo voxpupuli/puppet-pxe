@@ -25,11 +25,13 @@ define pxe::images::coreos(
       path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       command => "wget ${srclocation}/coreos_production_pxe.vmlinuz",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe.vmlinuz";
+      creates => "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe.vmlinuz",
+      require => Class['pxe'];
     "wget ${os} pxe initrd.img ${arch} ${ver}":
       path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       command => "wget ${srclocation}/coreos_production_pxe_image.cpio.gz",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe_image.cpio.gz";
+      creates => "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe_image.cpio.gz",
+      require => Class['pxe'];
   }
 }

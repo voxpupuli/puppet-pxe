@@ -9,6 +9,7 @@ class pxe::syslinux::direct(
     cwd     => '/usr/local/src',
     command => "wget -q -O - ${syslinux_archive} | tar -xzf - -C `dirname ${syslinux_dir}`",
     creates => $syslinux_dir,
+    require => Class['pxe'],
   }
 
   file { "${tftp_root}/pxelinux.0":

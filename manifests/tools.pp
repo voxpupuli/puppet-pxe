@@ -4,6 +4,8 @@
 #
 class pxe::tools {
 
+  require Class['pxe']
+
   $tftp_root = $pxe::tftp_root
 
   # Create the directory to store all the tool images

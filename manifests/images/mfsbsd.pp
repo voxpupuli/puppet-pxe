@@ -59,5 +59,6 @@ define pxe::images::mfsbsd(
     command => "wget ${remotebase}/${remotedir}/${imgfile}",
     creates => "${localdir}/${imgfile}",
     path    => ['/usr/bin', '/usr/local/bin'],
+    require => Class['pxe'],
   }
 }

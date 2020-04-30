@@ -29,11 +29,13 @@ define pxe::images::debian(
       path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       command => "wget ${srclocation}/${path}/linux",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/linux";
+      creates => "${tftp_root}/images/${os}/${ver}/${arch}/linux",
+      require => Class['pxe'];
     "wget ${os} pxe initrd.img ${arch} ${ver}":
       path    => ['/usr/bin', '/usr/local/bin'],
       cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
       command => "wget ${srclocation}/${path}/initrd.gz",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/initrd.gz";
+      creates => "${tftp_root}/images/${os}/${ver}/${arch}/initrd.gz",
+      require => Class['pxe'];
   }
 }
