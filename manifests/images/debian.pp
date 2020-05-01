@@ -23,16 +23,12 @@ define pxe::images::debian (
   $path    = "${ver}/main/installer-${arch}/current/images/${netboot}/${os}-installer/${arch}"
   $tftp_root = $pxe::tftp_root
 
-  exec {
-    "wget ${os} pxe linux ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
-      command => "wget ${srclocation}/${path}/linux",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/linux";
-    "wget ${os} pxe initrd.img ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
-      command => "wget ${srclocation}/${path}/initrd.gz",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/initrd.gz";
+  archive { "${tftp_root}/images/${os}/${ver}/${arch}/linux":
+    ensure => present,
+    source => "${srclocation}/${path}/linux";
+  }
+  archive { "${tftp_root}/images/${os}/${ver}/${arch}/initrd.gz":
+    ensure => present,
+    source => "${srclocation}/${path}/initrd.gz";
   }
 }

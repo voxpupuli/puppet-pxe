@@ -14,16 +14,12 @@ define pxe::images::redhat (
 
   $srclocation = inline_template($baseurl)
 
-  exec {
-    "wget redhat pxe linux ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/redhat/${ver}/${arch}",
-      creates => "${tftp_root}/images/redhat/${ver}/${arch}/vmlinuz",
-      command => "wget ${srclocation}/vmlinuz";
-    "wget redhat pxe initrd.img ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/redhat/${ver}/${arch}",
-      creates => "${tftp_root}/images/redhat/${ver}/${arch}/initrd.img",
-      command => "wget ${srclocation}/initrd.img";
+  archive { "${tftp_root}/images/redhat/${ver}/${arch}/vmlinuz":
+    ensure => present,
+    source => "${srclocation}/vmlinuz";
+  }
+  archive { "${tftp_root}/images/redhat/${ver}/${arch}/initrd.img":
+    ensure => present,
+    source => "${srclocation}/initrd.img";
   }
 }

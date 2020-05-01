@@ -7,11 +7,18 @@ class pxe::tools::memtest (
 ) {
   $tftp_root = $pxe::tftp_root
 
-  exec { 'retrieve memtest image':
-    path    => ['/usr/bin', '/usr/local/bin', '/bin'],
-    command => "wget -q -O - ${url} | gunzip > ${tftp_root}/tools/memtest86+",
-    creates => "${tftp_root}/tools/memtest86+",
-    require => Class['Pxe::Tools'],
+  archive { "${tftp_root}/tools/memtest86+-4.20.bin.gz":
+    ensure       => present,
+    source       => $url,
+    extract      => true,
+    extract_path => "${tftp_root}/tools",
+    creates      => "${tftp_root}/tools/memtest86+-4.20.bin",
+    require      => Class['Pxe::Tools'];
+  }
+  file { "${tftp_root}/tools/memtest86+":
+    ensure  => link,
+    target  => "${tftp_root}/tools/memtest86+-4.20.bin",
+    require => Archive["${tftp_root}/tools/memtest86+-4.20.bin.gz"];
   }
 
   # Create the menu entry

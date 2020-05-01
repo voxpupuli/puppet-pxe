@@ -53,10 +53,8 @@ define pxe::images::mfsbsd (
 
   $imgfile   = "${os}-${ver}-${arch}.img"
 
-  exec { "wget ${os} live image ${arch} ${ver}":
-    cwd     => $localdir,
-    command => "wget ${remotebase}/${remotedir}/${imgfile}",
-    creates => "${localdir}/${imgfile}",
-    path    => ['/usr/bin', '/usr/local/bin'],
+  archive { "${localdir}/${imgfile}":
+    ensure => present,
+    source => "${remotebase}/${remotedir}/${imgfile}";
   }
 }

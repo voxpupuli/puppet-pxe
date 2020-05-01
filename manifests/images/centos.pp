@@ -16,16 +16,12 @@ define pxe::images::centos (
     $srclocation = inline_template($baseurl)
   }
 
-  exec {
-    "wget ${os} pxe linux ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/vmlinuz",
-      command => "wget ${srclocation}/vmlinuz";
-    "wget ${os} pxe initrd.img ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/initrd.img",
-      command => "wget ${srclocation}/initrd.img";
+  archive { "${tftp_root}/images/${os}/${ver}/${arch}/vmlinuz":
+    ensure => present,
+    source => "${srclocation}/vmlinuz";
+  }
+  archive { "${tftp_root}/images/${os}/${ver}/${arch}/initrd.img":
+    ensure => present,
+    source => "${srclocation}/initrd.img";
   }
 }

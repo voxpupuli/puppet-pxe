@@ -1,4 +1,4 @@
-# Class: pxe::images::debian
+# Class: pxe::images::coreos
 #
 # Retrieve the requested CoreOS image
 #
@@ -19,16 +19,12 @@ define pxe::images::coreos (
 
   $tftp_root = $pxe::tftp_root
 
-  exec {
-    "wget ${os} pxe linux ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
-      command => "wget ${srclocation}/coreos_production_pxe.vmlinuz",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe.vmlinuz";
-    "wget ${os} pxe initrd.img ${arch} ${ver}":
-      path    => ['/usr/bin', '/usr/local/bin'],
-      cwd     => "${tftp_root}/images/${os}/${ver}/${arch}",
-      command => "wget ${srclocation}/coreos_production_pxe_image.cpio.gz",
-      creates => "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe_image.cpio.gz";
+  archive { "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe.vmlinuz":
+    ensure => present,
+    source => "${srclocation}/coreos_production_pxe.vmlinuz";
+  }
+  archive { "${tftp_root}/images/${os}/${ver}/${arch}/coreos_production_pxe_image.cpio.gz":
+    ensure => present,
+    source => "${srclocation}/coreos_production_pxe_image.cpio.gz";
   }
 }
