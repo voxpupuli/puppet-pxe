@@ -12,7 +12,7 @@ class pxe::syslinux(
       syslinux_dir => $system_syslinux_dir,
       tftp_root    => $tftp_root,
     }
-  } elsif $syslinux_version =~ /^([1-9]+)\./ {
+  } elsif $syslinux_version =~ /^([0-9]+)\./ {
     $syslinux_major_version = $1
     class { 'pxe::syslinux::direct':
       syslinux_dir     => "/usr/local/src/syslinux-${syslinux_version}",
