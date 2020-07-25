@@ -1,12 +1,11 @@
 #
 # This class will install the syslinux images into the tftp root directory.
 #
-class pxe::syslinux(
+class pxe::syslinux (
   String[1] $syslinux_version,
   String[1] $tftp_root,
   String[1] $system_syslinux_dir   = $pxe::params::system_syslinux_dir,
 ) inherits pxe::params {
-
   if $syslinux_version == 'system' {
     class { 'pxe::syslinux::system':
       syslinux_dir => $system_syslinux_dir,
@@ -31,8 +30,8 @@ class pxe::syslinux(
   }
 
   ensure_resource('file', $tftp_root, {
-    ensure  => directory,
-    require => undef,
+      ensure  => directory,
+      require => undef,
   })
 
   file { "${tftp_root}/syslinux":
@@ -42,5 +41,4 @@ class pxe::syslinux(
   file { "${tftp_root}/pxelinux.cfg":
     ensure => directory,
   }
-
 }

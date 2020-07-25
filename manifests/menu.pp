@@ -13,7 +13,6 @@ define pxe::menu (
   $template = 'pxe/menu.erb',
   $root     = 'default',
 ) {
-
   $tftp_root = $pxe::tftp_root
   $fullpath  = "${tftp_root}/pxelinux.cfg"
 

@@ -4,8 +4,7 @@
 #
 class pxe::tools::memtest (
   $url = 'http://www.memtest.org/download/4.20/memtest86+-4.20.bin.gz',
-){
-
+) {
   $tftp_root = $pxe::tftp_root
 
   exec { 'retrieve memtest image':

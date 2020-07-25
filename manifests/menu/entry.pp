@@ -11,14 +11,13 @@
 # Sample Usage:
 #
 define pxe::menu::entry (
-    $file,
-    $order     = '10',
-    $template  = 'pxe/menuentry.erb',
-    $kernel    = 'menu.c32',
-    $append    = undef,
-    $menutitle = undef,
+  $file,
+  $order     = '10',
+  $template  = 'pxe/menuentry.erb',
+  $kernel    = 'menu.c32',
+  $append    = undef,
+  $menutitle = undef,
 ) {
-
   if ! $menutitle {
     $label = $title
   } else {

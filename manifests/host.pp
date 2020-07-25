@@ -13,7 +13,6 @@ define pxe::host (
   $boot_interface = 'eth0',
   $seed_url       = 'http://tork.znet/bootstrap/maverick.cfg',
 ) {
-
   $kernel = "images/ubuntu/${ver}/${arch}/linux"
   $initrd = "images/ubuntu/${ver}/${arch}/initrd.gz"
 
@@ -32,5 +31,4 @@ define pxe::host (
     kernel => $kernel,
     append => inline_template('<% @appendargs.each do |arg| %><%= @arg %> <% end %>'),
   }
-
 }

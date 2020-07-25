@@ -13,17 +13,16 @@
 # Sample Usage:
 #
 define pxe::menu::installentry (
-    $kernel,
-    $append,
-    $file,
-    $arch,
-    $os,
-    $ver,
-    $order     = '10',
-    $template  = 'pxe/menuinstallentry.erb',
-    $menutitle = undef,
+  $kernel,
+  $append,
+  $file,
+  $arch,
+  $os,
+  $ver,
+  $order     = '10',
+  $template  = 'pxe/menuinstallentry.erb',
+  $menutitle = undef,
 ) {
-
   if ! $menutitle {
     $label = $title
   } else {

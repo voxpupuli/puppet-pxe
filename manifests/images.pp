@@ -13,7 +13,6 @@ define pxe::images (
   $netboot = 'netboot',
   $baseurl = undef,
 ) {
-
   include pxe
 
   $tftp_root = $pxe::tftp_root

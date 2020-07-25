@@ -4,7 +4,6 @@ define pxe::menu::host (
   $kernel,
   $append,
 ) {
-
   $tftp_root = $pxe::tftp_root
   $label     = $title
 
@@ -15,5 +14,4 @@ define pxe::menu::host (
   }
 
   concat { "${tftp_root}/pxelinux.cfg/${title}": }
-
 }

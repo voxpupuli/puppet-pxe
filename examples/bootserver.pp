@@ -100,4 +100,3 @@ permute { 'Debian Ops':
     menutitle => 'Operations auto-deployment <%=@os%> <%=@ver%> <%=@arch%>',
   },
 }
-

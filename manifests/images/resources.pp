@@ -11,7 +11,6 @@ define pxe::images::resources (
   $ver,
   $arch,
 ) {
-
   $tftp_root = $pxe::tftp_root
   $os_cap    = inline_template('<%= @os.capitalize %>')
 
@@ -32,8 +31,8 @@ define pxe::images::resources (
   # Menu
   if !defined(Pxe::Menu['Main Menu']) {
     @pxe::menu { 'Main Menu':
-        file     => 'default',
-        template => 'pxe/menu_default.erb';
+      file     => 'default',
+      template => 'pxe/menu_default.erb';
     }
   }
 

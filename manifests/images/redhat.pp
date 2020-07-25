@@ -2,13 +2,12 @@
 #
 # Retrieve the requested RedHat image
 #
-define pxe::images::redhat(
+define pxe::images::redhat (
   $arch,
   $ver,
   $os,
   $baseurl,
 ) {
-
   $tftp_root = $pxe::tftp_root
 
   if ! $baseurl { err('$baseurl is empty and it need not be') }
