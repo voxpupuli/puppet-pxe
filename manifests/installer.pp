@@ -13,8 +13,7 @@ define pxe::installer (
   $baseurl = undef,
   $netboot = 'netboot',
   $menu    = true,
-){
-
+) {
   if $menu {
     Pxe::Menu <||>
     Pxe::Menu::Entry <||>

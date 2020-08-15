@@ -1,8 +1,7 @@
-class pxe::syslinux::system(
+class pxe::syslinux::system (
   String[1] $tftp_root,
   String[1] $syslinux_dir,
 ) {
-
   package { 'syslinux': }
 
   file { "${tftp_root}/pxelinux.0":

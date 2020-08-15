@@ -2,14 +2,13 @@
 #
 # Retrieve the requested Debian image
 #
-define pxe::images::debian(
+define pxe::images::debian (
   $arch,
   $ver,
   $netboot = 'netboot', # ubuntu provides other netboots, ex "utopic-netboot"
   $os      = 'debian', # ubuntu also works
   $baseurl = undef,
 ) {
-
   if ! $baseurl {
     case $os {
       'debian': { $srclocation = "http://ftp.debian.org/${os}/dists" }

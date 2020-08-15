@@ -1,9 +1,8 @@
-class pxe::syslinux::direct(
+class pxe::syslinux::direct (
   String[1] $tftp_root,
   String[1] $syslinux_archive,
   String[1] $syslinux_dir,
 ) {
-
   exec { 'syslinux_install':
     path    => ['/bin', '/usr/bin', '/usr/local/bin'],
     cwd     => '/usr/local/src',

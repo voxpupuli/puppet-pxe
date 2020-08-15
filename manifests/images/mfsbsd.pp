@@ -19,13 +19,12 @@
 #   The version of mfsbsd to download. Is constructed in the fashion of
 #   $MAJOR.$MINOR-RELEASE as in 8.4-RELEASE.
 #
-define pxe::images::mfsbsd(
+define pxe::images::mfsbsd (
   $arch,
   $ver,
   $baseurl = undef,
   $os = 'mfsbsd',
 ) {
-
   # TODO: with deprecation of puppet < 4, use puppet regex type and fail()
   validate_re($arch, '^(amd64|i386)$')
   validate_re($os, '^(mfsbsd|mfsbsd-se|mfsbsd-mini)$')

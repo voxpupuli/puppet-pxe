@@ -8,12 +8,11 @@ class pxe (
   $syslinux_version = $pxe::params::syslinux_version,
   $tools            = true,
 ) inherits pxe::params {
-
   class { 'pxe::syslinux':
     tftp_root        => $tftp_root,
     syslinux_version => $syslinux_version,
   }
-  if $tools{
+  if $tools {
     include pxe::tools
   }
 }

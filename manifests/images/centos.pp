@@ -2,13 +2,12 @@
 #
 # Retrieve the requested CentOS image
 #
-define pxe::images::centos(
+define pxe::images::centos (
   $arch,
   $ver,
   $os      = 'centos',
   $baseurl = undef,
 ) {
-
   $tftp_root = $pxe::tftp_root
 
   if ! $baseurl {
