@@ -2,8 +2,15 @@ require 'spec_helper'
 
 describe 'pxe::syslinux::direct' do
   context 'should contain pxe::syslinux::direct class' do
+    let(:params) do
+      {
+        syslinux_dir: '/var/lib/syslinux',
+        syslinux_archive: 'https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.tar.gz',
+        tftp_root: '/srv/tftp'
+      }
+    end
+
     it do
-      is_expected.to compile.with_all_deps
       is_expected.to contain_class('pxe::syslinux::direct')
     end
   end

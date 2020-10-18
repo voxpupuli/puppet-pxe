@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe 'pxe::tools::memtest' do
   context 'should contain pxe::tools::memtest class' do
+    let(:params) do
+      {
+        url: 'http://www.memtest.org/download/4.20/memtest86+-4.20.bin.gz',
+      }
+    end
+
     it do
-      is_expected.to compile.with_all_deps
       is_expected.to contain_class('pxe::tools::memtest')
     end
   end
