@@ -4,7 +4,7 @@
 #
 class pxe::tools (
   $tftp_root = $pxe::tftp_root,
-){
+) {
   # Create the directory to store all the tool images
   file { "${tftp_root}/tools":
     ensure => directory,
