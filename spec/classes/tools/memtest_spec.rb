@@ -5,6 +5,7 @@ describe 'pxe::tools::memtest' do
     let(:params) do
       {
         url: 'http://www.memtest.org/download/4.20/memtest86+-4.20.bin.gz',
+        tftp_root: '/srv/tftp'
       }
     end
 
