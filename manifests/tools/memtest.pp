@@ -22,7 +22,8 @@ class pxe::tools::memtest (
 
   # Create the menu entry
   pxe::menu::entry { 'Memtest86+':
-    file   => 'menu_tools',
-    kernel => 'tools/memtest86+',
+    file      => 'menu_tools',
+    kernel    => 'tools/memtest86+',
+    tftp_root => $tftp_root,
   }
 }
