@@ -7,6 +7,8 @@ describe 'pxe' do
 
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('pxe') }
+      it { is_expected.to contain_class('pxe::tools') }
+      it { is_expected.to contain_class('pxe::tools::memtest') }
     end
   end
 end
