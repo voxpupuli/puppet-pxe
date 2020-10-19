@@ -9,8 +9,11 @@ describe 'pxe::syslinux::system' do
       }
     end
 
-    it do
-      is_expected.to contain_package('syslinux')
-    end
+    it { is_expected.to contain_package('syslinux') }
+    it { is_expected.to contain_file('/srv/tftp/pxelinux.0') }
+    it { is_expected.to contain_File('/srv/tftp/syslinux/memdisk') }
+    it { is_expected.to contain_File('/srv/tftp/syslinux/menu.c32') }
+    it { is_expected.to contain_file('/srv/tftp/syslinux/reboot.c32') }
+    it { is_expected.to contain_file('/srv/tftp/syslinux/vesamenu.c32') }
   end
 end
