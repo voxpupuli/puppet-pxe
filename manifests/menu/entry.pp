@@ -17,6 +17,7 @@ define pxe::menu::entry (
   $kernel    = 'menu.c32',
   $append    = undef,
   $menutitle = undef,
+  $tftp_root = $pxe::tftp_root
 ) {
   if ! $menutitle {
     $label = $title
@@ -24,7 +25,6 @@ define pxe::menu::entry (
     $label = $menutitle
   }
 
-  $tftp_root = $pxe::tftp_root
   $fullpath  = "${tftp_root}/pxelinux.cfg"
 
   $file_string   = inline_template($file)

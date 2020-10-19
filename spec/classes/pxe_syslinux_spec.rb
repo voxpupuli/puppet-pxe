@@ -11,12 +11,13 @@ describe 'pxe::syslinux' do
       }
     end
 
-    it do
-      is_expected.to contain_class('pxe::syslinux::direct')
-      is_expected.to contain_file('/srv/tftp')
-      is_expected.to contain_file('/srv/tftp/syslinux')
-      is_expected.to contain_file('/srv/tftp/pxelinux.cfg')
-    end
+    it { is_expected.to contain_class('pxe::syslinux::direct') }
+    it { is_expected.to contain_file('/srv/tftp') }
+    it { is_expected.to contain_file('/srv/tftp/syslinux') }
+    it { is_expected.to contain_file('/srv/tftp/pxelinux.cfg') }
+    it { is_expected.to contain_archive('/usr/local/src/syslinux-6.02.tar.gz') }
+    it { is_expected.to contain_class('Pxe::Params') }
+    it { is_expected.to contain_file('/usr/local/src/syslinux-6.02') }
   end
 
   context 'can install system syslinux' do
@@ -29,9 +30,7 @@ describe 'pxe::syslinux' do
       }
     end
 
-    it do
-      is_expected.to contain_class('pxe::syslinux::system')
-    end
+    it { is_expected.to contain_class('pxe::syslinux::system') }
   end
 
   context 'fail on bad input' do
@@ -44,8 +43,6 @@ describe 'pxe::syslinux' do
       }
     end
 
-    it do
-      is_expected.to compile.and_raise_error(%r{Invalid Syslinux Version})
-    end
+    it { is_expected.to compile.and_raise_error(%r{Invalid Syslinux Version}) }
   end
 end
