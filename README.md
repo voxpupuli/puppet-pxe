@@ -69,9 +69,9 @@ $debian_versions.each |$ver| {
       arch   => $arch,
       ver    => $ver,
       os     => $os,
-      file   => 'os_${os}',
-      kernel => 'images/${os}/${ver}/${arch}/linux',
-      append => 'initrd=images/${os}/${ver}/${arch}/initrd.gz text',
+      file   => "os_${os}",
+      kernel => "images/${os}/${ver}/${arch}/linux",
+      append => "initrd=images/${os}/${ver}/${arch}/initrd.gz text",
     }
   }
 }
