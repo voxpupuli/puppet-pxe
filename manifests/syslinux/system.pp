@@ -9,6 +9,11 @@ class pxe::syslinux::system (
     require => Package['syslinux'],
   }
 
+  file { "${tftp_root}/syslinux/ldlinux.c32":
+    source  => "${syslinux_dir}/ldlinux.c32",
+    require => Package['syslinux'],
+  }
+
   file { "${tftp_root}/syslinux/menu.c32":
     source  => "${syslinux_dir}/menu.c32",
     require => Package['syslinux'],
@@ -16,6 +21,11 @@ class pxe::syslinux::system (
 
   file { "${tftp_root}/syslinux/vesamenu.c32":
     source  => "${syslinux_dir}/vesamenu.c32",
+    require => Package['syslinux'],
+  }
+
+  file { "${tftp_root}/syslinux/libutil.c32":
+    source  => "${syslinux_dir}/libutil.c32",
     require => Package['syslinux'],
   }
 

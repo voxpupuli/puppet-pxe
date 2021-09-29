@@ -14,6 +14,8 @@ describe 'pxe::syslinux::system' do
     it { is_expected.to contain_File('/srv/tftp/syslinux/memdisk') }
     it { is_expected.to contain_File('/srv/tftp/syslinux/menu.c32') }
     it { is_expected.to contain_file('/srv/tftp/syslinux/reboot.c32') }
+    it { is_expected.to contain_file('/srv/tftp/syslinux/ldlinux.c32') }
+    it { is_expected.to contain_file('/srv/tftp/syslinux/libutil.c32') }
     it { is_expected.to contain_file('/srv/tftp/syslinux/vesamenu.c32') }
   end
 end
