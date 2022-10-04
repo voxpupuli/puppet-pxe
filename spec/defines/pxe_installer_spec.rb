@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'pxe::installer' do
@@ -23,6 +25,7 @@ describe 'pxe::installer' do
           is_expected.to contain_pxe__menu__entry('Installer: debian potato amd64').with('kernel' => 'images/debian/potato/amd64/linux',
                                                                                          'append' => 'initrd=images/debian/potato/amd64/initrd.gz text')
         end
+
         it { is_expected.to contain_archive('/srv/tftp/images/debian/potato/amd64/initrd.gz') }
         it { is_expected.to contain_archive('/srv/tftp/images/debian/potato/amd64/linux') }
         it { is_expected.to contain_archive('/srv/tftp/tools/memtest86+-4.20.bin.gz') }
