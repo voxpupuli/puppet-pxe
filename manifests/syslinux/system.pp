@@ -24,6 +24,21 @@ class pxe::syslinux::system (
     require => Package['syslinux'],
   }
 
+  file { "${tftp_root}/syslinux/ldlinux.c32":
+    source  => "${syslinux_dir}/ldlinux.c32",
+    require => Package['syslinux'],
+  }
+
+  file { "${tftp_root}/syslinux/libcom32.c32":
+    source  => "${syslinux_dir}/libcom32.c32",
+    require => Package['syslinux'],
+  }
+
+  file { "${tftp_root}/syslinux/libutil.c32":
+    source  => "${syslinux_dir}/libutil.c32",
+    require => Package['syslinux'],
+  }
+
   file { "${tftp_root}/syslinux/memdisk":
     source  => "${syslinux_dir}/memdisk",
     require => Package['syslinux'],
