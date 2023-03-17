@@ -8,39 +8,19 @@ class pxe::syslinux::system (
     source  => "${syslinux_dir}/pxelinux.0",
     require => Package['syslinux'],
   }
-
-  file { "${tftp_root}/syslinux/menu.c32":
-    source  => "${syslinux_dir}/menu.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/vesamenu.c32":
-    source  => "${syslinux_dir}/vesamenu.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/reboot.c32":
-    source  => "${syslinux_dir}/reboot.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/ldlinux.c32":
-    source  => "${syslinux_dir}/ldlinux.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/libcom32.c32":
-    source  => "${syslinux_dir}/libcom32.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/libutil.c32":
-    source  => "${syslinux_dir}/libutil.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/memdisk":
-    source  => "${syslinux_dir}/memdisk",
-    require => Package['syslinux'],
+  $tftproot_syslinux_files = [
+    'menu.c32',
+    'vesamenu.c32',
+    'reboot.c32',
+    'ldlinux.c32',
+    'libcom32.c32',
+    'libutil.c32',
+    'mendisk',
+    ]
+  $tftproot_syslinux_files.each |$file| {
+    file { "${tftp_root}/syslinux/${file}":
+      source  => "${syslinux_dir}/${file}",
+      require => Package['syslinux'],
+    }
   }
 }
