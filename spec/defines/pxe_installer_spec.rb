@@ -21,7 +21,7 @@ describe 'pxe::installer' do
         end
 
         it do
-          is_expected.to contain_pxe__installer('debian_potato_amd64')
+          is_expected.to contain_pxe__installer('debian potato amd64')
           is_expected.to contain_pxe__menu__entry('Installer: debian potato amd64').with('kernel' => 'images/debian/potato/amd64/linux',
                                                                                          'append' => 'initrd=images/debian/potato/amd64/initrd.gz text')
         end
