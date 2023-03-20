@@ -16,7 +16,7 @@ class pxe::syslinux::system (
     'libcom32.c32',
     'libutil.c32',
     'memdisk',
-    ]
+  ]
   $tftproot_syslinux_files.each |$file| {
     file { "${tftp_root}/syslinux/${file}":
       source  => "${syslinux_dir}/${file}",
