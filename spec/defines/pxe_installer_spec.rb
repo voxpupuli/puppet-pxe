@@ -8,7 +8,7 @@ describe 'pxe::installer' do
       let(:facts) { facts.merge(concat_basedir: '/dne') }
 
       context 'simple' do
-        let(:title) { 'debian_potato_amd64' }
+        let(:title) { 'debian potato amd64' }
         let(:params) do
           {
             arch: 'amd64',
