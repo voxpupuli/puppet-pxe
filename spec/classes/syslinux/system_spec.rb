@@ -11,7 +11,6 @@ describe 'pxe::syslinux::system' do
       }
     end
 
-    it { is_expected.to contain_class('pxe::syslinux::direct') }
     it { is_expected.to contain_package('syslinux') }
     it { is_expected.to contain_file('/srv/tftp/pxelinux.0') }
     it { is_expected.to contain_file('/srv/tftp/syslinux/ldlinux.c32') }
