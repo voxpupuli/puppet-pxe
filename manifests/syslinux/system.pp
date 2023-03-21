@@ -8,7 +8,7 @@ class pxe::syslinux::system (
     source  => "${syslinux_dir}/pxelinux.0",
     require => Package['syslinux'],
   }
-  
+
   file { "${tftp_root}/syslinux":
     source  => $syslinux_dir,
     recurse => true,
