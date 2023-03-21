@@ -14,5 +14,4 @@ class pxe::syslinux::system (
     recurse => true,
     require => Package['syslinux'],
   }
-
 }
