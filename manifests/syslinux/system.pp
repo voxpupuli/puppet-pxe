@@ -18,8 +18,9 @@ class pxe::syslinux::system (
     'memdisk',
   ]
   $tftproot_syslinux_files.each |$file| {
-    file { "${tftp_root}/syslinux/${file}":
-      source  => "${syslinux_dir}/${file}",
+    file { "${tftp_root}/syslinux":
+      source  => $syslinux_dir,
+      recurse => true,
       require => Package['syslinux'],
     }
   }
