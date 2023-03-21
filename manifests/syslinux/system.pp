@@ -8,20 +8,11 @@ class pxe::syslinux::system (
     source  => "${syslinux_dir}/pxelinux.0",
     require => Package['syslinux'],
   }
-  $tftproot_syslinux_files = [
-    'menu.c32',
-    'vesamenu.c32',
-    'reboot.c32',
-    'ldlinux.c32',
-    'libcom32.c32',
-    'libutil.c32',
-    'memdisk',
-  ]
-  $tftproot_syslinux_files.each |$file| {
-    file { "${tftp_root}/syslinux":
-      source  => $syslinux_dir,
-      recurse => true,
-      require => Package['syslinux'],
-    }
+  
+  file { "${tftp_root}/syslinux":
+    source  => $syslinux_dir,
+    recurse => true,
+    require => Package['syslinux'],
   }
+
 }
