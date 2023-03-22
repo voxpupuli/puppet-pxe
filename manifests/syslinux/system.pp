@@ -9,7 +9,7 @@ class pxe::syslinux::system (
     require => Package['syslinux'],
   }
 
-  file { "${tftp_root}/syslinux":
+  File { "${tftp_root}/syslinux":
     source  => $syslinux_dir,
     recurse => true,
     require => Package['syslinux'],

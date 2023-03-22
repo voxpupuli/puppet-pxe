@@ -7,7 +7,6 @@ class pxe::syslinux (
   String[1] $system_syslinux_dir   = $pxe::params::system_syslinux_dir,
 ) inherits pxe::params {
   if $syslinux_version == 'system' {
-    # pxe::syslinux::system will also manage ${tftp_root}/syslinux
     class { 'pxe::syslinux::system':
       syslinux_dir => $system_syslinux_dir,
       tftp_root    => $tftp_root,
@@ -18,9 +17,6 @@ class pxe::syslinux (
       syslinux_dir     => "/usr/local/src/syslinux-${syslinux_version}",
       syslinux_archive => "https://www.kernel.org/pub/linux/utils/boot/syslinux/${syslinux_major_version}.xx/syslinux-${syslinux_version}.tar.gz",
       tftp_root        => $tftp_root,
-    }
-    file { "${tftp_root}/syslinux":
-      ensure => directory,
     }
   } else {
     fail('Invalid Syslinux Version')
@@ -37,6 +33,10 @@ class pxe::syslinux (
       ensure  => directory,
       require => undef,
   })
+
+  file { "${tftp_root}/syslinux":
+    ensure => directory,
+  }
 
   file { "${tftp_root}/pxelinux.cfg":
     ensure => directory,
