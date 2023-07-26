@@ -19,18 +19,20 @@ define pxe::installer (
     Pxe::Menu::Entry <||>
   }
 
-  pxe::images { "${os} ${ver} ${arch}":
-    os      => $os,
-    ver     => $ver,
-    arch    => $arch,
-    netboot => $netboot,
-    baseurl => $baseurl,
+  unless defined(Pxe::Images["${os} ${ver} ${arch}"]) {
+    pxe::images { "${os} ${ver} ${arch}":
+      os      => $os,
+      ver     => $ver,
+      arch    => $arch,
+      netboot => $netboot,
+      baseurl => $baseurl,
+    }
   }
 
   $append_string = inline_template($append)
   $kernel_string = inline_template($kernel)
 
-  pxe::menu::entry { "Installer: ${os} ${ver} ${arch}":
+  pxe::menu::entry { "Installer: ${title}":
     file   => "os_${os}",
     kernel => $kernel_string,
     append => $append_string,
