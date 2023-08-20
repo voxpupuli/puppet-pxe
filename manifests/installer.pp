@@ -1,6 +1,6 @@
 # Define: pxe::installer
 #
-# Downlaods the requested image and sets up a generic installation entry for
+# Downloads the requested image and sets up a generic installation entry for
 # each image.
 #
 define pxe::installer (

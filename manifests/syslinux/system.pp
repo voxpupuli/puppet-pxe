@@ -9,23 +9,9 @@ class pxe::syslinux::system (
     require => Package['syslinux'],
   }
 
-  file { "${tftp_root}/syslinux/menu.c32":
-    source  => "${syslinux_dir}/menu.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/vesamenu.c32":
-    source  => "${syslinux_dir}/vesamenu.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/reboot.c32":
-    source  => "${syslinux_dir}/reboot.c32",
-    require => Package['syslinux'],
-  }
-
-  file { "${tftp_root}/syslinux/memdisk":
-    source  => "${syslinux_dir}/memdisk",
+  File["${tftp_root}/syslinux"] {
+    source  => $syslinux_dir,
+    recurse => true,
     require => Package['syslinux'],
   }
 }
