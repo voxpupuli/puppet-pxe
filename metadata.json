@@ -38,7 +38,7 @@
     },
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 4.4.0 < 6.0.0"
+      "version_requirement": ">= 4.4.0 < 8.0.0"
     }
   ]
 }
